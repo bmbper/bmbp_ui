@@ -1,0 +1,18 @@
+.login-bg{
+  width: 100%;
+  height: 100%;
+  background: url("/assets/img/login_bg.jpg");
+  background-size: 100% 100%;
+  position: fixed;
+}
+
+.login-form{
+  width: 360px;
+  height: 240px;
+  margin-top: 120px;
+  margin-left:auto ;
+  margin-right: 40px;
+  color: white;
+  background-color: aliceblue;
+  padding:0;
+}

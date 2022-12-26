@@ -1,0 +1,28 @@
+<div class="login-bg">
+    <div class="login-form">
+    <d-card>
+        <d-card-header>
+            <d-card-title>Bmbp Develop Platform</d-card-title>
+        </d-card-header>
+        <d-card-content>
+            <form dForm [layout]="layoutDirection" [labelSize]="'sm'">
+                <d-form-item>
+                    <d-form-label [required]="true">用户名</d-form-label>
+                    <d-form-control [extraInfo]="''">
+                        <input dTextInput name="userName" />
+                    </d-form-control>
+                </d-form-item>
+                <d-form-item>
+                    <d-form-label [required]="true">密码</d-form-label>
+                    <d-form-control [extraInfo]="''">
+                        <input dTextInput name="password" type="password" />
+                    </d-form-control>
+                </d-form-item>
+            </form>
+        </d-card-content>
+        <d-card-actions>
+            <d-button (click)="onLogin()">登录</d-button>
+        </d-card-actions>
+    </d-card>
+    </div>
+</div>
