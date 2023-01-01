@@ -14,11 +14,8 @@
     </d-aside>
     <d-content>
       <d-breadcrumb>
-        <d-breadcrumb-item>
-          <span>DevUI</span>
-        </d-breadcrumb-item>
-        <d-breadcrumb-item>
-          <span>面包屑</span>
+        <d-breadcrumb-item *ngFor="let item of brac_menu;">
+          <span>{{item}}</span>
         </d-breadcrumb-item>
       </d-breadcrumb>
       <div class="inner-content">

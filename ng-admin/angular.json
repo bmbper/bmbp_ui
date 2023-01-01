@@ -29,7 +29,9 @@
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "src/styles.scss",
-              "node_modules/ng-devui/devui.min.css"
+              "node_modules/ng-devui/devui.min.css",
+              "node_modules/ng-devui/devui-layout.min.css"
+
             ],
             "scripts": []
           },
@@ -95,7 +97,8 @@
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "src/styles.scss",
-              "node_modules/ng-devui/devui.min.css"
+              "node_modules/ng-devui/devui.min.css",
+              "node_modules/ng-devui/devui-layout.min.css"
             ],
             "scripts": []
           }

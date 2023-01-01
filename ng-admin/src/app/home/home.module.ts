@@ -5,13 +5,14 @@ import {BmbpLoginComponent} from "./login/login.component";
 import {DevUIModule} from "ng-devui";
 import {RouterModule} from "@angular/router";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {RbacModule} from "../sys/rbac/rbac.module";
 
 
 
 @NgModule({
   declarations: [BmbpHomeComponent,BmbpLoginComponent],
   imports: [
-    CommonModule,DevUIModule,RouterModule,BrowserAnimationsModule
+    CommonModule,DevUIModule,RouterModule,BrowserAnimationsModule,RbacModule
   ],
   providers: [DevUIModule],
 })
