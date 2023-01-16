@@ -1,27 +1,33 @@
 <d-row [dGutter]="24">
-  <d-col [dSpan]="4">
-    <d-tree (nodeSelected)="onNodeSelected($event)" (nodeToggled)="onNodeToggled($event)" [tree]="data"></d-tree>
-  </d-col>
-  <d-col [dSpan]="20">
-    <d-row [dGutter]="24">
-      <d-col [dSpan]="24" style="height: 60px;background: antiquewhite">
-      </d-col>
-      <d-col [dSpan]="24">
-        <d-button id="primaryBtn" style="margin-right: 8px">Primary</d-button>
-        <d-button [disabled]="true">Disabled</d-button>
-      </d-col>
-      <d-col [dSpan]="24">
-        <d-data-table #datatable [dataSource]="basicDataSource" [scrollable]="true" [tableOverflowType]="'overlay'">
-          <d-column [width]="'50px'" field="$index" header="#"></d-column>
-          <d-column
-            *ngFor="let colOption of dataTableOptions.columns"
-            [fieldType]="colOption.fieldType"
-            [field]="colOption.field"
-            [header]="colOption.header"
-            [width]="'150px'">
-          </d-column>
-        </d-data-table>
-      </d-col>
-    </d-row>
-  </d-col>
+    <d-col [dSpan]="24">
+        {{
+        organ.organTitle
+        }}
+    </d-col>
+    <d-col [dSpan]="4">
+        <d-tree (nodeSelected)="onNodeSelected($event)" (nodeToggled)="onNodeToggled($event)" [tree]="data"></d-tree>
+    </d-col>
+    <d-col [dSpan]="20">
+        <d-row [dGutter]="24">
+            <d-col [dSpan]="24" style="height: 60px;background: antiquewhite">
+            </d-col>
+            <d-col [dSpan]="24">
+                <d-button id="primaryBtn" style="margin-right: 8px">Primary</d-button>
+                <d-button [disabled]="true">Disabled</d-button>
+            </d-col>
+            <d-col [dSpan]="24">
+                <d-data-table #datatable [dataSource]="basicDataSource" [scrollable]="true"
+                              [tableOverflowType]="'overlay'">
+                    <d-column [width]="'50px'" field="$index" header="#"></d-column>
+                    <d-column
+                            *ngFor="let colOption of dataTableOptions.columns"
+                            [fieldType]="colOption.fieldType"
+                            [field]="colOption.field"
+                            [header]="colOption.header"
+                            [width]="'150px'">
+                    </d-column>
+                </d-data-table>
+            </d-col>
+        </d-row>
+    </d-col>
 </d-row>

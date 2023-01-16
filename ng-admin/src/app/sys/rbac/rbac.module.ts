@@ -6,9 +6,10 @@ import { MenuComponent } from './menu/menu.component';
 import { ApiComponent } from './api/api.component';
 import { DataComponent } from './data/data.component';
 import { RoleComponent } from './role/role.component';
-import {DevUIModule, LayoutModule} from "ng-devui";
-import {RouterModule} from "@angular/router";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { DevUIModule, LayoutModule } from 'ng-devui';
+import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { OrganService } from '@app/sys/rbac/organ/organ.service';
 
 @NgModule({
   declarations: [
@@ -17,11 +18,15 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     MenuComponent,
     ApiComponent,
     DataComponent,
-    RoleComponent
+    RoleComponent,
   ],
   imports: [
-    CommonModule,DevUIModule,RouterModule,BrowserAnimationsModule,LayoutModule
+    CommonModule,
+    DevUIModule,
+    RouterModule,
+    BrowserAnimationsModule,
+    LayoutModule,
   ],
-  providers:[DevUIModule,LayoutModule]
+  providers: [DevUIModule, LayoutModule, OrganService],
 })
-export class RbacModule { }
+export class RbacModule {}

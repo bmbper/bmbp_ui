@@ -1,28 +1,28 @@
 <div>
-<d-layout class="bmbp-main">
-  <d-header>
-    <div class="logo">
+    <d-layout class="bmbp-main">
+        <d-header>
+            <div class="logo">
       <span class="logo-devui">
-        <img [src]="logoSrc" width="26px" height="26px" />
+        <img [src]="logoSrc" height="26px" width="26px"/>
       </span>
-      <span class="text">DevUI</span>
-    </div>
-  </d-header>
-  <d-layout>
-    <d-aside>
-      <d-accordion [data]="menu" class="menu" (itemClick)="menuClick($event)" ></d-accordion>
-    </d-aside>
-    <d-content>
-      <d-breadcrumb>
-        <d-breadcrumb-item *ngFor="let item of brac_menu;">
-          <span>{{item}}</span>
-        </d-breadcrumb-item>
-      </d-breadcrumb>
-      <div class="inner-content">
-      <router-outlet></router-outlet>
-      </div>
-    </d-content>
-  </d-layout>
-  <d-footer>footer</d-footer>
-</d-layout>
+                <span class="text">DevUI</span>
+            </div>
+        </d-header>
+        <d-layout>
+            <d-aside>
+                <d-accordion (itemClick)="menuClick($event)" [data]="menu" class="menu"></d-accordion>
+            </d-aside>
+            <d-content>
+                <d-breadcrumb>
+                    <d-breadcrumb-item *ngFor="let item of brac_menu;">
+                        <span>{{item}}</span>
+                    </d-breadcrumb-item>
+                </d-breadcrumb>
+                <div class="inner-content">
+                    <router-outlet></router-outlet>
+                </div>
+            </d-content>
+        </d-layout>
+        <d-footer>footer</d-footer>
+    </d-layout>
 </div>
