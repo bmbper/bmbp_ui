@@ -1,76 +1,73 @@
-.bmbp-main{
-  width: 100%;
-  height: 100%;
-  background: red;
-  position: fixed;
-}
-
-
 @import 'ng-devui/styles-var/devui-var.scss';
 
-d-layout {
+$header-height: 40px;
+$footer-height: 24px;
+$center-height: calc(100% - $header-height - $footer-height);
+
+$aside-width: 200px;
+$full-height: 100%;
+
+.bmbp-layout {
   width: 100%;
   height: 100%;
-  //position: fixed;
-  background-color: $devui-base-bg;
-}
+  border: red solid 2px;
 
-d-aside {
-  border-left: 1px solid transparent;
-}
+  .bmbp-layout-header {
+    width: inherit;
+    height: $header-height;
+    border: green solid 2px;
+  }
 
-d-header {
-  text-align: left;
-  height: 40px;
-  background-color: $devui-base-bg-dark;
-  position: relative;
+  .bmbp-layout-center {
+    width: inherit;
+    height: $center-height;
+    border: blue solid 2px;
+    display: flex;
 
-  .logo {
-    position: absolute;
-    left: 0;
-    margin-left: 20px;
-    height: 40px;
-    width: 160px;
-    color: $devui-light-text;
-    font-size: $devui-font-size-icon;
-    line-height: 40px;
+    .bmbp-layout-aside {
+      width: $aside-width;
+      height: $full-height;
+      border: blueviolet solid 2px;
+      overflow-y: auto;
+      overflow-x: hidden;
 
-    .logo-devui {
-      margin-top: 8px;
+      .bmbp-layout-aside-menu {
+        width: $aside-width;
+      }
     }
 
-    .logo-devui,
-    .text {
-      display: inline-block;
-      vertical-align: top;
+    .bmbp-layout-content {
+      width: calc(100% - $aside-width);
+      height: $full-height;
+      border: greenyellow solid 2px;
+      max-height: $full-height;
+      display: block;
+
+      .header {
+        width: 100%;
+        height: 24px;
+        max-height: 24px;
+        border: royalblue 2px solid;
+      }
+
+      .content {
+        width: 100%;
+        overflow: auto;
+        border: blueviolet 2px solid;
+        height: calc(100% - 24px);
+        max-height: calc(100% - 24px);
+        padding: 5px;
+      }
     }
+
   }
 
-  .search {
-    color: $devui-light-text;
-    margin-right: 40px;
-    position: absolute;
-    right: 0;
-  }
-}
-
-d-content {
-  padding: 0 10px;
-  background-color: $devui-global-bg;
-
-  d-breadcrumb {
-    margin-top: 8px;
-  }
-
-  .inner-content {
-    background-color: $devui-base-bg;
-    padding: 16px;
-    height: 100%;
+  .bmbp-layout-footer {
+    width: inherit;
+    height: $footer-height;
+    border: green solid 2px;
   }
 }
 
-d-footer {
-  color: $devui-light-text;
-  background-color: $devui-base-bg-dark;
-  padding: 4px 24px;
-}
+
+

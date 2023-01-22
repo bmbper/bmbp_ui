@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from '@app/http.service';
 import { Observable } from 'rxjs';
-import { RespVo } from '@app/sys/resp';
+import { RespVo } from '@app/vo';
 
 export interface OrganVo {
   rId?: string;

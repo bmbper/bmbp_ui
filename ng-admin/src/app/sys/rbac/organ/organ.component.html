@@ -1,11 +1,7 @@
-<d-row [dGutter]="24">
-    <d-col [dSpan]="24">
-        {{
-        organ.organTitle
-        }}
-    </d-col>
-    <d-col [dSpan]="4">
-        <d-tree (nodeSelected)="onNodeSelected($event)" (nodeToggled)="onNodeToggled($event)" [tree]="data"></d-tree>
+<d-row [dGutter]="24" class="bmbp-page-card">
+    <d-col [dSpan]="4" class="bmbp-page-tree-card">
+        <d-tree (nodeSelected)="onNodeSelected($event)" (nodeToggled)="onNodeToggled($event)" [tree]="data"
+                class="bmbp-page-tree"></d-tree>
     </d-col>
     <d-col [dSpan]="20">
         <d-row [dGutter]="24">

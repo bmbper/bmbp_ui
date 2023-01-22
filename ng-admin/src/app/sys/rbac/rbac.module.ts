@@ -10,6 +10,7 @@ import { DevUIModule, LayoutModule } from 'ng-devui';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OrganService } from '@app/sys/rbac/organ/organ.service';
+import { MenuService } from '@app/sys/rbac/menu/menu.service';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,6 @@ import { OrganService } from '@app/sys/rbac/organ/organ.service';
     BrowserAnimationsModule,
     LayoutModule,
   ],
-  providers: [DevUIModule, LayoutModule, OrganService],
+  providers: [DevUIModule, LayoutModule, OrganService, MenuService],
 })
 export class RbacModule {}

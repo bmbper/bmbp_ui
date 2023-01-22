@@ -1,1 +1,56 @@
-<p>menu works!</p>
+<div class="bmbp-page bmbp-page-tg">
+    <div class="bmbp-page-tg-tl">
+        <d-tree (nodeSelected)="onMenuItemClick($event)"
+                [treeNodeChildrenKey]="menuTreeConfig.nodeChildren"
+                [treeNodeIdKey]="menuTreeConfig.nodeKey"
+                [treeNodeTitleKey]="menuTreeConfig.nodeTitle"
+                [tree]="menuTreeData"
+
+        ></d-tree>
+    </div>
+    <div class="bmbp-page-tg-gr">
+        <div class="bmbp-page-tg-gr-top-bar">
+            <div class="left">
+                <div>
+                    <d-button (btnClick)="onAddMenu()">新增</d-button>
+                </div>
+            </div>
+            <div class="right">
+            </div>
+        </div>
+        <div class="bmbp-page-tg-gr-query-form">
+        </div>
+        <div class="bmbp-page-tg-gr-grid">
+            <d-data-table [borderType]="'bordered'"
+                          [dataSource]="menuGrid.data.data"
+                          [size]="'mini'"
+            >
+                <d-column [width]="'50px'" field="$index" header="#"></d-column>
+                <d-column
+                        *ngFor="let colOption of menuGrid.columns"
+                        [fieldType]="colOption.fieldType"
+                        [field]="colOption.field"
+                        [header]="colOption.header"
+                        [width]="'150px'"
+                >
+                </d-column>
+            </d-data-table>
+        </div>
+        <div class="bmbp-page-tg-gr-grid-page">
+            <d-pagination
+                    (pageIndexChange)="onMenuGridPageNoChange($event)"
+                    (pageSizeChange)="onMenuGridPageSizeChange($event)"
+
+                    [(pageIndex)]="menuGrid.data.pageNo"
+
+                    [(pageSize)]="menuGrid.data.pageSize"
+                    [canChangePageSize]="true"
+                    [canViewTotal]="true"
+                    [maxItems]="5"
+                    [size]="'sm'"
+                    [total]="menuGrid.data.total"
+            >
+            </d-pagination>
+        </div>
+    </div>
+</div>

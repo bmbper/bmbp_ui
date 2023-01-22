@@ -1,28 +1,27 @@
-<div>
-    <d-layout class="bmbp-main">
-        <d-header>
-            <div class="logo">
-      <span class="logo-devui">
-        <img [src]="logoSrc" height="26px" width="26px"/>
-      </span>
-                <span class="text">DevUI</span>
+<div class="bmbp-layout">
+    <div class="bmbp-layout-header">
+        <span>顶部导航</span>
+    </div>
+    <div class="bmbp-layout-center">
+        <div class="bmbp-layout-aside">
+            <d-accordion (itemClick)="menuItemClick($event)"
+                         [data]="rbacMenu" [showNoContent]=false
+                         accordionType="embed"
+                         class="bmbp-layout-aside-menu"></d-accordion>
+        </div>
+        <div class="bmbp-layout-content">
+            <div class="header">
+                多选项卡、面包屑
             </div>
-        </d-header>
-        <d-layout>
-            <d-aside>
-                <d-accordion (itemClick)="menuClick($event)" [data]="menu" class="menu"></d-accordion>
-            </d-aside>
-            <d-content>
-                <d-breadcrumb>
-                    <d-breadcrumb-item *ngFor="let item of brac_menu;">
-                        <span>{{item}}</span>
-                    </d-breadcrumb-item>
-                </d-breadcrumb>
-                <div class="inner-content">
-                    <router-outlet></router-outlet>
-                </div>
-            </d-content>
-        </d-layout>
-        <d-footer>footer</d-footer>
-    </d-layout>
+            <div class="content">
+                <!--                <div style="background: aqua;width: 12400px;height: 17000px">Content</div>-->
+                <router-outlet></router-outlet>
+            </div>
+
+        </div>
+    </div>
+    <div class="bmbp-layout-footer">
+        底部版权
+    </div>
 </div>
+
