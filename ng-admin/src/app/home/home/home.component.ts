@@ -10,6 +10,7 @@ import { HomeService, NavMenuVo } from '@app/home/home/home.service';
 })
 export class BmbpHomeComponent implements OnInit {
   rbacMenu: NavMenuVo[] = [];
+  breadCrumb: string[] = [];
 
   constructor(
     private router: Router,
@@ -29,12 +30,25 @@ export class BmbpHomeComponent implements OnInit {
     let route = event.item.route;
     if (route) {
       this.router.navigateByUrl(route).then((r) => {
-        console.log('路由跳转失败');
+        if (r) {
+          this.changeNavBreadCrumb(event);
+        }
       });
     } else {
       this.toastService.open({
         value: [{ severity: 'warn', summary: '警告', content: '请配置路由' }],
       });
     }
+  }
+
+  private changeNavBreadCrumb(event: AccordionItemClickEvent): void {
+    let bread = [];
+    bread.push(event.item.title);
+    let parent = event.parent;
+    while (parent) {
+      bread.push(parent.title);
+      parent = parent.parent;
+    }
+    this.breadCrumb = bread.reverse();
   }
 }

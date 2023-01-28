@@ -11,10 +11,13 @@
         </div>
         <div class="bmbp-layout-content">
             <div class="header">
-                多选项卡、面包屑
+                <d-breadcrumb>
+                    <d-breadcrumb-item *ngFor="let item of breadCrumb ">
+                        <span>{{item}}</span>
+                    </d-breadcrumb-item>
+                </d-breadcrumb>
             </div>
             <div class="content">
-                <!--                <div style="background: aqua;width: 12400px;height: 17000px">Content</div>-->
                 <router-outlet></router-outlet>
             </div>
 

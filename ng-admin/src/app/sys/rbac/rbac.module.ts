@@ -11,6 +11,8 @@ import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OrganService } from '@app/sys/rbac/organ/organ.service';
 import { MenuService } from '@app/sys/rbac/menu/menu.service';
+import { FormsModule } from '@angular/forms';
+import { PropFromMapPipe, DictValuePipe } from '@app/pipe';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { MenuService } from '@app/sys/rbac/menu/menu.service';
     ApiComponent,
     DataComponent,
     RoleComponent,
+    DictValuePipe,
+    PropFromMapPipe,
   ],
   imports: [
     CommonModule,
@@ -27,6 +31,7 @@ import { MenuService } from '@app/sys/rbac/menu/menu.service';
     RouterModule,
     BrowserAnimationsModule,
     LayoutModule,
+    FormsModule,
   ],
   providers: [DevUIModule, LayoutModule, OrganService, MenuService],
 })

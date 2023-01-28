@@ -1,4 +1,5 @@
-import { OnInit } from '@angular/core';
+import { AfterViewInit, OnInit } from '@angular/core';
+import { FormLayout } from 'ng-devui';
 
 export declare interface BaseVo {
   rId?: string;
@@ -62,4 +63,16 @@ export declare interface BmbpGridPage {
   pageSize: number;
 }
 
-export declare interface CrudService extends OnInit {}
+export declare interface BmbpGridQueryFrom<T> {
+  fieldLayout: FormLayout;
+  data: T;
+}
+
+export declare interface CrudService extends OnInit, AfterViewInit {}
+
+export declare interface SelectItem {
+  label: string;
+  value: string;
+}
+
+export declare type SelectOptions = SelectItem[];

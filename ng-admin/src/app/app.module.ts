@@ -7,6 +7,8 @@ import { RouterModule } from '@angular/router';
 import { HomeModule } from './home/home.module';
 import { httpInterceptorProviders, HttpService } from '@app/http.service';
 import { HttpClientModule } from '@angular/common/http';
+import { PropFromMapPipe, DictValuePipe } from '@app/pipe';
+import { UtilService } from '@app/util.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,7 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
     HomeModule,
     HttpClientModule,
   ],
-  providers: [DevUIModule, httpInterceptorProviders, HttpService],
+  providers: [DevUIModule, httpInterceptorProviders, HttpService, UtilService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

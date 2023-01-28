@@ -18,12 +18,21 @@ export class HttpService {
   constructor(private http: HttpClient) {}
 
   get<T>(url: string, params: any): Observable<T> {
-    return this.http.get<T>(url, { params: params });
+    return this.http.get<T>(url, {
+      params: params,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
   }
 
   post<T>(url: string, params: any): Observable<T> {
     return this.http
-      .post<T>(url, { params: JSON.stringify(params) })
+      .post<T>(url, JSON.stringify(params), {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
       .pipe(catchError(this.handleError));
   }
 
@@ -42,6 +51,7 @@ export class HttpServiceInterceptor implements HttpInterceptor {
     console.log('拦截一下');
     let authToken = window.localStorage.getItem('bmbp_token');
     let headers = {
+      'Content-Type': 'application/json',
       ContentType: 'application/json',
       Authorization: authToken || '',
     };
