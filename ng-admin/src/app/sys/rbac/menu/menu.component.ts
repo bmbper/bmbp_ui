@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, TemplateRef, ViewChild } from '@angular/core';
 import {
   BmbpMenuQueryFrom,
   BmbpMenuVo,
@@ -12,6 +12,7 @@ import {
   CrudService,
 } from '@app/vo';
 import {
+  DialogService,
   Dictionary,
   FormLayout,
   ToastService,
@@ -19,6 +20,7 @@ import {
   TreeNode,
 } from 'ng-devui';
 import { UtilService } from '@app/util.service';
+import { MenuFormComponent } from '@app/sys/rbac/menu/menu-form/menu-form.component';
 
 @Component({
   selector: 'app-menu',
@@ -28,14 +30,18 @@ import { UtilService } from '@app/util.service';
 export class MenuComponent implements CrudService {
   @ViewChild('menuTree', { static: true })
   menuTree: TreeComponent | undefined;
-
   menuTreeData: BmbpMenuVo[] = [];
-
   menuTreeConfig: BmbpTreeConfig = {
     nodeTitle: 'menuTitle',
     nodeKey: 'menuId',
     nodeChildren: 'children',
   };
+  selectMenuTreeNode: BmbpMenuVo = {};
+  selectMenuRowNode: BmbpMenuVo = {};
+
+  @ViewChild('addMenuDialog', { static: true }) addMenuDialog:
+    | TemplateRef<any>
+    | undefined;
 
   selectOptions = {
     menuRouteType: [
@@ -97,7 +103,8 @@ export class MenuComponent implements CrudService {
   constructor(
     private service: MenuService,
     private toast: ToastService,
-    public util: UtilService
+    public util: UtilService,
+    private dialog: DialogService
   ) {
     this.service.findMenuTree().subscribe((vo) => {
       this.menuTreeData = vo.data;
@@ -113,12 +120,32 @@ export class MenuComponent implements CrudService {
   onMenuItemClick(event: TreeNode) {
     this.menuGridQueryForm.data.parentMenuId = event.data.originItem.menuId;
     this.menuGridQueryForm.data.parentMenuPath = event.data.originItem.menuPath;
+    this.selectMenuTreeNode = event.data.originItem;
     this.loadMenuGridData();
   }
 
   onAddMenu() {
-    this.toast.open({
-      value: [{ severity: 'info', summary: '提醒', content: '功能开发中' }],
+    const addMenuFormModal = this.dialog.open({
+      id: 'rbac-menu-add-form',
+      width: '700px',
+      maxHeight: '500px',
+      title: '新增-菜单资源',
+      contentTemplate: this.addMenuDialog,
+      backdropCloseable: true,
+      buttons: [
+        {
+          cssClass: 'primary',
+          text: '提交',
+          handler: ($event: Event) => {},
+        },
+        {
+          cssClass: 'common',
+          text: '取消',
+          handler: ($event: Event) => {
+            addMenuFormModal.modalInstance.hide();
+          },
+        },
+      ],
     });
   }
 

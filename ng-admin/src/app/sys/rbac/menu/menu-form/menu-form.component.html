@@ -1,0 +1,63 @@
+<div>
+    <form dForm [layout]="layoutDirection" ngForm [labelSize]="'sm'" [labelAlign]="'end'">
+        <d-row [dGutter]="24">
+            <d-col [dSpan]="24">
+                <d-form-item>
+                    <d-form-label>上级资源</d-form-label>
+                    <d-form-control>
+                        <input dTextInput [ngModel]="menuData.menuTitle" [disabled]="true"/>
+                    </d-form-control>
+                </d-form-item>
+            </d-col>
+            <d-col [dSpan]="24">
+                <d-form-item>
+                    <d-form-label [required]="true">资源名称</d-form-label>
+                    <d-form-control>
+                        <input dTextInput name="menuTitle" [(ngModel)]="menuData.menuTitle"/>
+                    </d-form-control>
+                </d-form-item>
+            </d-col>
+
+            <d-col [dSpan]="12">
+                <d-form-item>
+                    <d-form-label [required]="true">资源类型</d-form-label>
+                    <d-form-control>
+                        <input dTextInput name="menuType" [(ngModel)]="menuData.menuTitle"/>
+                    </d-form-control>
+                </d-form-item>
+            </d-col>
+
+            <d-col [dSpan]="12">
+                <d-form-item>
+                    <d-form-label [required]="true">访问类型</d-form-label>
+                    <d-form-control>
+                        <input dTextInput name="menuRouteType" [(ngModel)]="menuData.menuRouteType"/>
+                    </d-form-control>
+                </d-form-item>
+            </d-col>
+            <d-col [dSpan]="24">
+                <d-form-item>
+                    <d-form-label [required]="true">访问路径</d-form-label>
+                    <d-form-control>
+                        <input dTextInput name="menuRoute" [(ngModel)]="menuData.menuRoute"/>
+                    </d-form-control>
+                </d-form-item>
+            </d-col>
+            <d-col [dSpan]="12">
+
+            </d-col>
+            <d-col [dSpan]="12">
+
+            </d-col>
+            <d-col [dSpan]="12">
+
+            </d-col>
+            <d-col [dSpan]="12">
+
+            </d-col>
+            <d-col [dSpan]="12">
+
+            </d-col>
+        </d-row>
+    </form>
+</div>

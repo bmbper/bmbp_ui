@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="bmbp-page-tg-gr-query-form">
-            <form [labelSize]="'sm'" [layout]="menuGridQueryForm.fieldLayout" dForm ngForm>
+            <form [labelSize]="'sm'" [layout]="menuGridQueryForm.fieldLayout" dForm ngForm [labelAlign]="'end'">
                 <d-row [dGutter]="24">
                     <d-col [dSpan]="7">
                         <d-form-item>
@@ -119,4 +119,13 @@
             </d-pagination>
         </div>
     </div>
+    <ng-template #addMenuDialog let-modalInstance="modalInstance" let-modalContentInstance="modalContentInstance">
+        <app-menu-form [data]="selectMenuTreeNode" [modalInstance]="modalInstance"
+                       [modalContentInstance]="modalContentInstance"></app-menu-form>
+    </ng-template>
+
+    <ng-template #addSubMenuDialog let-modalInstance="modalInstance" let-modalContentInstance="modalContentInstance">
+        <app-menu-form [data]="selectMenuRowNode" [modalInstance]="modalInstance"
+                       [modalContentInstance]="modalContentInstance"></app-menu-form>
+    </ng-template>
 </div>
