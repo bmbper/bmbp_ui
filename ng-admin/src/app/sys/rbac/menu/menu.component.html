@@ -119,4 +119,13 @@
             </d-pagination>
         </div>
     </div>
+    <ng-template #addMenuDialog let-modalInstance="modalInstance" let-modalContentInstance="modalContentInstance">
+        <app-menuform [data]="selectMenuTreeNode" [modalInstance]="modalInstance"
+                      [modalContentInstance]="modalContentInstance"></app-menuform>
+    </ng-template>
+
+    <ng-template #addSubMenuDialog let-modalInstance="modalInstance" let-modalContentInstance="modalContentInstance">
+        <app-menuform [data]="selectMenuRowNode" [modalInstance]="modalInstance"
+                      [modalContentInstance]="modalContentInstance"></app-menuform>
+    </ng-template>
 </div>

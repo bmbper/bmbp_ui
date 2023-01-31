@@ -13,6 +13,7 @@ import { OrganService } from '@app/sys/rbac/organ/organ.service';
 import { MenuService } from '@app/sys/rbac/menu/menu.service';
 import { FormsModule } from '@angular/forms';
 import { PropFromMapPipe, DictValuePipe } from '@app/pipe';
+import { MenuformComponent } from './menu/menuform/menuform.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { PropFromMapPipe, DictValuePipe } from '@app/pipe';
     RoleComponent,
     DictValuePipe,
     PropFromMapPipe,
+    MenuformComponent,
   ],
   imports: [
     CommonModule,

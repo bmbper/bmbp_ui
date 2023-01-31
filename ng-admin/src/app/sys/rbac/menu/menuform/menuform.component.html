@@ -1,0 +1,40 @@
+<div class="modal-cases-component">
+    <form dForm [layout]="layoutDirection" ngForm>
+        <d-form-item>
+            <d-form-label [required]="true" [hasHelp]="true" [helpTips]="'请输入已有分支名'">基于</d-form-label>
+            <d-form-control>
+                <div>
+                    <input
+                            dTextInput
+                            autocomplete="off"
+                            name="branch"
+                            placeholder="请输入已有分支名"
+                            [(ngModel)]="menuData.menuTitle"
+
+                    />
+                </div>
+            </d-form-control>
+        </d-form-item>
+        <d-form-item>
+            <d-form-label [required]="true">标签名称</d-form-label>
+            <d-form-control>
+                <div>
+                    <input
+                            dTextInput
+                            autocomplete="off"
+                            name="tag"
+                            placeholder="请填写标签名，最长200个字符"
+                            maxlength="200"
+                            [(ngModel)]="menuData.parentMenuId"
+                    />
+                </div>
+            </d-form-control>
+        </d-form-item>
+        <d-form-item>
+            <d-form-label>描述</d-form-label>
+            <d-form-control [extraInfo]="'您最多还可以输入 ' + (2000 )  + ' 个字符'">
+                <textarea dTextarea name="des" maxlength="2000" placeholder="请输入描述信息" [(ngModel)]="menuData.menuTitle"></textarea>
+            </d-form-control>
+        </d-form-item>
+    </form>
+</div>
