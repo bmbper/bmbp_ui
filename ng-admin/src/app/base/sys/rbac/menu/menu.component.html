@@ -1,0 +1,129 @@
+<div class="bmbp-page bmbp-page-tg">
+    <div class="bmbp-page-tg-tl">
+        <d-tree #menuTree (nodeSelected)="onMenuItemClick($event)"
+                [treeNodeChildrenKey]="menuTreeConfig.nodeChildren"
+                [treeNodeIdKey]="menuTreeConfig.nodeKey"
+                [treeNodeTitleKey]="menuTreeConfig.nodeTitle"
+                [tree]="menuTreeData"
+                (afterTreeInit)="afterMenuTreeInit($event)"
+
+        ></d-tree>
+    </div>
+    <div class="bmbp-page-tg-gr">
+        <div class="bmbp-page-tg-gr-top-bar">
+            <div class="left">
+                <div>
+                    <d-button (btnClick)="onAddMenu()" [bsSize]="'sm'">新增</d-button>
+                </div>
+            </div>
+            <div class="right">
+            </div>
+        </div>
+        <div class="bmbp-page-tg-gr-query-form">
+            <form [labelSize]="'sm'" [layout]="menuGridQueryForm.fieldLayout" dForm ngForm [labelAlign]="'end'">
+                <d-row [dGutter]="24">
+                    <d-col [dSpan]="7">
+                        <d-form-item>
+                            <d-form-label>
+                                资源名称:
+                            </d-form-label>
+                            <d-form-control>
+                                <input [(ngModel)]="menuGridQueryForm.data.menuTitle" autocomplete="off" dTextInput
+                                       name="menuTitle"/>
+                            </d-form-control>
+                        </d-form-item>
+                    </d-col>
+                    <d-col [dSpan]="7">
+                        <d-form-item>
+                            <d-form-label>
+                                资源类型:
+                            </d-form-label>
+                            <d-form-control>
+                                <d-select
+                                        [options]="selectOptions.menuRouteType"
+                                        [ngModel]="menuGridQueryForm.data.menuRouteType|dictValuePipe:selectOptions.menuRouteType"
+                                        (ngModelChange)="menuGridQueryForm.data.menuRouteType = $event.value"
+                                        [filterKey]="'label'"
+                                        [allowClear]="true"
+                                        name="资源类型"></d-select>
+                            </d-form-control>
+                        </d-form-item>
+                    </d-col>
+                    <d-col [dSpan]="3">
+                        <div class="bmbp-page-tg-gr-query-form-bar">
+                            <d-button (click)="onQueryMenuGrid()" [bsSize]="'xs'">查询</d-button>
+                            <d-button (click)="onQueryFormDataClear()" [bsSize]="'xs'" bsStyle="common">清空</d-button>
+                        </div>
+                    </d-col>
+                </d-row>
+            </form>
+        </div>
+        <div class="bmbp-page-tg-gr-grid">
+            <d-data-table [borderType]="'bordered'"
+                          [dataSource]="menuGrid.data.data"
+                          [size]="'mini'">
+                <d-column [width]="'40px'" field="$index" header="#"></d-column>
+                <d-column
+                        *ngFor="let colOption of menuGrid.columns"
+                        [fieldType]="colOption.fieldType"
+                        [field]="colOption.field"
+                        [header]="colOption.header"
+                        [width]="'150px'">
+                    <d-cell *ngIf="colOption.field =='menuRouteType'">
+                        <ng-template let-cellItem="cellItem">
+                            {{util.dictLabel(cellItem, selectOptions.menuRouteType)}}
+                        </ng-template>
+                    </d-cell>
+                </d-column>
+                <d-column [width]="'120px'" header="操作" field="$index">
+                    <d-cell>
+                        <ng-template let-rowItem="rowItem" let-rowIndex="rowIndex">
+                            <d-icon dTooltip [content]="'新增下级'" [icon]="'icon-add-sub-node'"
+                                    [operable]="true" [color]="'#5E7CE0'"
+                                    (click)="onAddSubMenu($event,rowItem)"></d-icon>
+                            <d-icon dTooltip [content]="'调整父级'" [icon]="'icon-go-tree'" [operable]="true"
+                                    (click)="onChangeParent($event,rowItem)"
+                            ></d-icon>
+                            <d-icon dTooltip [content]="'编辑'" [icon]="'icon-edit'" [operable]="true"
+                                    [color]="'#5E7CE0'"
+                                    (click)="onEditMenu($event,rowItem)"></d-icon>
+                            <d-icon dTooltip [content]="'查看明细'" [icon]="'icon-base-info2'"
+                                    [operable]="true"
+                                    (click)="onViewMenu($event,rowItem)"></d-icon>
+
+                            <d-icon dTooltip [content]="'删除'" [icon]="'icon-delete'" [operable]="true"
+                                    [color]="'#F66F6A'"
+                                    (click)="onDeleteMenu($event,rowItem)"></d-icon>
+                        </ng-template>
+                    </d-cell>
+                </d-column>
+
+            </d-data-table>
+        </div>
+        <div class="bmbp-page-tg-gr-grid-page">
+            <d-pagination
+                    (pageIndexChange)="onMenuGridPageNoChange($event)"
+                    (pageSizeChange)="onMenuGridPageSizeChange($event)"
+
+                    [(pageIndex)]="menuGrid.data.pageNo"
+
+                    [(pageSize)]="menuGrid.data.pageSize"
+                    [canChangePageSize]="true"
+                    [canViewTotal]="true"
+                    [maxItems]="5"
+                    [size]="'sm'"
+                    [total]="menuGrid.data.total"
+            >
+            </d-pagination>
+        </div>
+    </div>
+    <ng-template #addMenuDialog let-modalInstance="modalInstance" let-modalContentInstance="modalContentInstance">
+        <app-menu-form [data]="selectMenuTreeNode" [modalInstance]="modalInstance"
+                       [modalContentInstance]="modalContentInstance"></app-menu-form>
+    </ng-template>
+
+    <ng-template #addSubMenuDialog let-modalInstance="modalInstance" let-modalContentInstance="modalContentInstance">
+        <app-menu-form [data]="selectMenuRowNode" [modalInstance]="modalInstance"
+                       [modalContentInstance]="modalContentInstance"></app-menu-form>
+    </ng-template>
+</div>

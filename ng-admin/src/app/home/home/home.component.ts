@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccordionItemClickEvent, ToastService } from 'ng-devui';
 import { HomeService, NavMenuVo } from '@app/home/home/home.service';
+import { BmbpLayoutEnum } from '@app/components/layout/components';
 
 @Component({
   selector: 'bmbp-home',
@@ -11,6 +12,19 @@ import { HomeService, NavMenuVo } from '@app/home/home/home.service';
 export class BmbpHomeComponent implements OnInit {
   rbacMenu: NavMenuVo[] = [];
   breadCrumb: string[] = [];
+  portalConfig: {
+    leftWidth?: string | number;
+    centerLayout: {
+      height?: string | number;
+      layout?: BmbpLayoutEnum;
+    };
+  } = {
+    leftWidth: '160px',
+    centerLayout: {
+      height: 'calc(100% - 60px)',
+      layout: BmbpLayoutEnum.Row,
+    },
+  };
 
   constructor(
     private router: Router,

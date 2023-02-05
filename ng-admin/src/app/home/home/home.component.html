@@ -1,30 +1,20 @@
-<div class="bmbp-layout">
-    <div class="bmbp-layout-header">
-        <span>顶部导航</span>
-    </div>
-    <div class="bmbp-layout-center">
-        <div class="bmbp-layout-aside">
+<app-bmbp-layout>
+    <app-bmbp-layout-top>
+        <bmbp-home-header [width]="portalConfig.leftWidth"/>
+    </app-bmbp-layout-top>
+    <app-bmbp-layout [layout]="portalConfig.centerLayout">
+        <app-bmbp-layout-left [width]="portalConfig.leftWidth">
             <d-accordion (itemClick)="menuItemClick($event)"
                          [data]="rbacMenu" [showNoContent]=false
                          accordionType="embed"
                          class="bmbp-layout-aside-menu"></d-accordion>
-        </div>
-        <div class="bmbp-layout-content">
-            <div class="header">
-                <d-breadcrumb>
-                    <d-breadcrumb-item *ngFor="let item of breadCrumb ">
-                        <span>{{item}}</span>
-                    </d-breadcrumb-item>
-                </d-breadcrumb>
-            </div>
-            <div class="content">
-                <router-outlet></router-outlet>
-            </div>
-
-        </div>
-    </div>
-    <div class="bmbp-layout-footer">
-        底部版权
-    </div>
-</div>
+        </app-bmbp-layout-left>
+        <app-bmbp-layout-center>
+            <router-outlet></router-outlet>
+        </app-bmbp-layout-center>
+    </app-bmbp-layout>
+    <app-bmbp-layout-footer>
+        版权信息
+    </app-bmbp-layout-footer>
+</app-bmbp-layout>
 
