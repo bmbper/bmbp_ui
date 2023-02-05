@@ -1,0 +1,6 @@
+- 'bmbp_com/**'
+- 'bmbp_common/**'
+- 'bmbp_libs/*'
+- 'bmbp_plugin/**'
+- 'bmbp_portal/**'
+- '!**/test/**'
