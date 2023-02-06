@@ -1,20 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BmbpHomeComponent } from './home/home/home.component';
+import { BmbpPortalComponent } from './home/portal/portal.component';
 import { BmbpLoginComponent } from './home/login/login.component';
-import { BmbpNotFoundComponent } from './base/err/notfound/notfound.component';
-import { OrganComponent } from './base/sys/rbac/organ/organ.component';
-import { UserComponent } from './base/sys/rbac/user/user.component';
-import { MenuComponent } from './base/sys/rbac/menu/menu.component';
-import { ApiComponent } from './base/sys/rbac/api/api.component';
-import { RoleComponent } from './base/sys/rbac/role/role.component';
-import { DataComponent } from './base/sys/rbac/data/data.component';
+import { BmbpNotFoundComponent } from './components/err/notfound/notfound.component';
+import { OrganComponent } from './rbac/sys/rbac/organ/organ.component';
+import { UserComponent } from './rbac/sys/rbac/user/user.component';
+import { MenuComponent } from './rbac/sys/rbac/menu/menu.component';
+import { ApiComponent } from './rbac/sys/rbac/api/api.component';
+import { RoleComponent } from './rbac/sys/rbac/role/role.component';
+import { DataComponent } from './rbac/sys/rbac/data/data.component';
 
 const routes: Routes = [
   { path: 'login', component: BmbpLoginComponent },
   {
-    path: 'home',
-    component: BmbpHomeComponent,
+    path: 'portal',
+    component: BmbpPortalComponent,
     children: [
       {
         path: 'sys/rbac/organ',

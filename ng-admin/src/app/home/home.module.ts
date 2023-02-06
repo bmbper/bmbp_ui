@@ -1,22 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BmbpHomeComponent } from './home/home.component';
+import { BmbpPortalComponent } from './portal/portal.component';
 import { BmbpLoginComponent } from './login/login.component';
 import { DevUIModule } from 'ng-devui';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RbacModule } from '../base/sys/rbac/rbac.module';
-import { HomeService } from '@app/home/home/home.service';
+import { RbacModule } from '../rbac/sys/rbac/rbac.module';
+import { PortalService } from '@app/home/portal/portal.service';
 import { HttpClientModule } from '@angular/common/http';
-import { HeaderComponent } from './home/header/header.component';
-import { LogoComponent } from './home/header/logo/logo.component';
-import { NavComponent } from './home/header/nav/nav.component';
-import { SetComponent } from './home/header/set/set.component';
+import { HeaderComponent } from './portal/header/header.component';
+import { LogoComponent } from './portal/header/logo/logo.component';
+import { NavComponent } from './portal/header/nav/nav.component';
+import { SetComponent } from './portal/header/set/set.component';
 import { ComponentsModule } from '@app/components/components.module';
 
 @NgModule({
   declarations: [
-    BmbpHomeComponent,
+    BmbpPortalComponent,
     BmbpLoginComponent,
     HeaderComponent,
     LogoComponent,
@@ -32,6 +32,6 @@ import { ComponentsModule } from '@app/components/components.module';
     HttpClientModule,
     ComponentsModule,
   ],
-  providers: [DevUIModule, HomeService],
+  providers: [DevUIModule, PortalService],
 })
 export class HomeModule {}

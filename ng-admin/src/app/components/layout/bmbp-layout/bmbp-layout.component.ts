@@ -22,7 +22,6 @@ export class BmbpLayoutComponent implements OnInit {
         this.layoutStyle.height = this.layout.height + 'px';
       }
     }
-    debugger;
     if (this.layout.layout != undefined) {
       if (this.layout.layout == BmbpLayoutEnum.Col) {
         this.layoutStyle.display = 'flex';

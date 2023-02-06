@@ -1,0 +1,20 @@
+<app-bmbp-layout>
+    <app-bmbp-layout-top>
+      <bmbp-portal-header [logWidth]="portalConfig.leftWidth"></bmbp-portal-header>
+    </app-bmbp-layout-top>
+    <app-bmbp-layout [layout]="portalConfig.centerLayout">
+        <app-bmbp-layout-left [width]="portalConfig.leftWidth">
+            <d-accordion (itemClick)="menuItemClick($event)"
+                         [data]="rbacMenu" [showNoContent]=false
+                         accordionType="embed"
+                         class="bmbp-layout-aside-menu"></d-accordion>
+        </app-bmbp-layout-left>
+        <app-bmbp-layout-center>
+            <router-outlet></router-outlet>
+        </app-bmbp-layout-center>
+    </app-bmbp-layout>
+    <app-bmbp-layout-footer>
+        版权信息
+    </app-bmbp-layout-footer>
+</app-bmbp-layout>
+

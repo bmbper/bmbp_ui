@@ -24,7 +24,7 @@ export class AppComponent implements OnInit{
   }
 
   goHome():void{
-    this.router.navigateByUrl("/home")
+    this.router.navigateByUrl('/portal');
   }
 
 }
