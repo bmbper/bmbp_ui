@@ -10,7 +10,9 @@
                          class="bmbp-layout-aside-menu"></d-accordion>
         </app-bmbp-layout-left>
         <app-bmbp-layout-center>
-            <router-outlet></router-outlet>
+            <bmbp-breadcrumb-page [breadcrumbData]="breadCrumbData" style="height: 100%">
+                <router-outlet></router-outlet>
+            </bmbp-breadcrumb-page>
         </app-bmbp-layout-center>
     </app-bmbp-layout>
     <app-bmbp-layout-footer>

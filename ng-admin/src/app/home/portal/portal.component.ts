@@ -12,6 +12,8 @@ import { BmbpLayoutEnum } from '@app/components/layout/components';
 export class BmbpPortalComponent implements OnInit {
   rbacMenu: NavMenuVo[] = [];
   breadCrumb: string[] = [];
+  breadCrumbData: any[] = [];
+
   portalConfig: {
     leftWidth?: string | number;
     centerLayout: {
@@ -63,6 +65,6 @@ export class BmbpPortalComponent implements OnInit {
       bread.push(parent.title);
       parent = parent.parent;
     }
-    this.breadCrumb = bread.reverse();
+    this.breadCrumbData = bread.reverse();
   }
 }

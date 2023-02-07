@@ -6,6 +6,9 @@ import { BmbpLayoutCenterComponent } from './layout/bmbp-layout-center/bmbp-layo
 import { BmbpLayoutFooterComponent } from './layout/bmbp-layout-footer/bmbp-layout-footer.component';
 import { BmbpLayoutLeftComponent } from './layout/bmbp-layout-left/bmbp-layout-left.component';
 import { BmbpLayoutRightComponent } from './layout/bmbp-layout-right/bmbp-layout-right.component';
+import { BreadcrumbPageComponent } from './page/breadcump-page/breadcrumb-page.component';
+import { RouterOutlet } from '@angular/router';
+import { BreadcrumbModule } from 'ng-devui';
 
 @NgModule({
   declarations: [
@@ -15,6 +18,7 @@ import { BmbpLayoutRightComponent } from './layout/bmbp-layout-right/bmbp-layout
     BmbpLayoutFooterComponent,
     BmbpLayoutLeftComponent,
     BmbpLayoutRightComponent,
+    BreadcrumbPageComponent,
   ],
   exports: [
     BmbpLayoutComponent,
@@ -22,7 +26,8 @@ import { BmbpLayoutRightComponent } from './layout/bmbp-layout-right/bmbp-layout
     BmbpLayoutFooterComponent,
     BmbpLayoutLeftComponent,
     BmbpLayoutCenterComponent,
+    BreadcrumbPageComponent,
   ],
-  imports: [CommonModule],
+  imports: [CommonModule, RouterOutlet, BreadcrumbModule],
 })
 export class ComponentsModule {}

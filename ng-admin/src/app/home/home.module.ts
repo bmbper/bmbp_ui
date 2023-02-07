@@ -28,9 +28,9 @@ import { ComponentsModule } from '@app/components/components.module';
     DevUIModule,
     RouterModule,
     BrowserAnimationsModule,
-    RbacModule,
     HttpClientModule,
     ComponentsModule,
+    RbacModule,
   ],
   providers: [DevUIModule, PortalService],
 })

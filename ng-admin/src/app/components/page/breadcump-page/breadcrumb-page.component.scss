@@ -1,0 +1,18 @@
+.bmbp-breadcrumb-page {
+  width: 100%;
+  height: inherit;
+
+  .bmbp-breadcrumb-page-header {
+    height: 28px;
+    width: 100%;
+    border-bottom: #F5F5F6 1px solid;
+    padding-left: 12px;
+  }
+
+  .bmbp-breadcrumb-page-content {
+    width: 100%;
+    height: calc(100% - 28px);
+    border: 0;
+    padding: 2px;
+  }
+}

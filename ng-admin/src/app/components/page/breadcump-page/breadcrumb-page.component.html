@@ -1,0 +1,12 @@
+<div class="bmbp-breadcrumb-page">
+    <div class="bmbp-breadcrumb-page-header">
+        <d-breadcrumb>
+            <d-breadcrumb-item *ngFor="let item of breadcrumbData">
+                <span>{{item}}</span>
+            </d-breadcrumb-item>
+        </d-breadcrumb>
+    </div>
+    <div class="bmbp-breadcrumb-page-content">
+        <ng-content></ng-content>
+    </div>
+</div>
