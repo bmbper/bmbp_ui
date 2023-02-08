@@ -7,25 +7,22 @@ import {
   TreeComponent,
   TreeNode,
 } from 'ng-devui';
-import {
-  OrganService,
-  OrganVo,
-} from 'src/app/rbac/sys/rbac/organ/organ.service';
+import { OrganService, OrganVo } from 'src/app/common/rbac/organ/organ.service';
 import {
   BmbpMenuQueryFrom,
   BmbpMenuVo,
   MenuService,
-} from '@app/rbac/sys/rbac/menu/menu.service';
+} from 'src/app/common/rbac/menu/menu.service';
 import {
   BmbpGrid,
   BmbpGridFieldType,
   BmbpGridQueryFrom,
   BmbpTreeConfig,
-} from '@app/vo';
-import { UtilService } from '@app/util.service';
+} from 'src/app/vo';
+import { UtilService } from 'src/app/util.service';
 
 @Component({
-  selector: 'rbac-organ',
+  selector: 'common-organ',
   templateUrl: './organ.component.html',
   styleUrls: ['./organ.component.scss'],
 })
@@ -125,7 +122,7 @@ export class OrganComponent implements OnInit {
 
   onOrganMenu() {
     const addMenuFormModal = this.dialog.open({
-      id: 'rbac-menu-add-form',
+      id: 'common-menu-add-form',
       width: '700px',
       maxHeight: '500px',
       title: '新增-菜单资源',

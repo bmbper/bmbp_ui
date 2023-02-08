@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SourceConfig } from 'ng-devui';
-import { BmbpBreadcrumbConfig } from '@app/bmbp.types';
+import { BmbpBreadcrumbConfig } from 'src/app/bmbp.types';
 import { Router } from '@angular/router';
 
 @Component({

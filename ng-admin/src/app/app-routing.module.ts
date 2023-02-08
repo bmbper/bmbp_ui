@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BmbpPortalComponent } from './home/portal/portal.component';
-import { BmbpLoginComponent } from './home/login/login.component';
+import { BmbpPortalComponent } from './portal/portal/portal.component';
+import { BmbpLoginComponent } from './portal/login/login.component';
 import { BmbpNotFoundComponent } from './components/err/notfound/notfound.component';
-import { OrganComponent } from './rbac/sys/rbac/organ/organ.component';
-import { UserComponent } from './rbac/sys/rbac/user/user.component';
-import { MenuComponent } from './rbac/sys/rbac/menu/menu.component';
-import { ApiComponent } from './rbac/sys/rbac/api/api.component';
-import { RoleComponent } from './rbac/sys/rbac/role/role.component';
-import { DataComponent } from './rbac/sys/rbac/data/data.component';
-import { WorkBeanchComponent } from '@app/home/work-beanch/work-beanch.component';
+import { OrganComponent } from './common/rbac/organ/organ.component';
+import { UserComponent } from './common/rbac/user/user.component';
+import { MenuComponent } from './common/rbac/menu/menu.component';
+import { ApiComponent } from './common/rbac/api/api.component';
+import { RoleComponent } from './common/rbac/role/role.component';
+import { DataComponent } from './common/rbac/data/data.component';
+import { WorkBeanchComponent } from '@app/portal/work-beanch/work-beanch.component';
 
 const routes: Routes = [
   { path: 'login', component: BmbpLoginComponent },
@@ -22,27 +22,27 @@ const routes: Routes = [
         component: WorkBeanchComponent,
       },
       {
-        path: 'sys/rbac/organ',
+        path: 'msg/common/organ',
         component: OrganComponent,
       },
       {
-        path: 'sys/rbac/user',
+        path: 'msg/common/user',
         component: UserComponent,
       },
       {
-        path: 'sys/rbac/menu',
+        path: 'msg/common/menu',
         component: MenuComponent,
       },
       {
-        path: 'sys/rbac/role',
+        path: 'msg/common/role',
         component: RoleComponent,
       },
       {
-        path: 'sys/rbac/api',
+        path: 'msg/common/api',
         component: ApiComponent,
       },
       {
-        path: 'sys/rbac/data',
+        path: 'msg/common/data',
         component: DataComponent,
       },
     ],

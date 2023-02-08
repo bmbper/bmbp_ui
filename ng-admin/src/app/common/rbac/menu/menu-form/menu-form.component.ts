@@ -4,7 +4,7 @@ import { ModalComponent } from 'ng-devui';
 import {
   BmbpMenuQueryFrom,
   BmbpMenuVo,
-} from 'src/app/rbac/sys/rbac/menu/menu.service';
+} from 'src/app/common/rbac/menu/menu.service';
 
 @Component({
   selector: 'app-menu-form',

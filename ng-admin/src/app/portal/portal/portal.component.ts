@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AccordionItemClickEvent, SourceConfig, ToastService } from 'ng-devui';
-import { PortalService, NavMenuVo } from '@app/home/portal/portal.service';
+import { PortalService, NavMenuVo } from '@app/portal/portal/portal.service';
 import { BmbpLayoutEnum } from '@app/components/layout/components';
 import { BmbpBreadcrumbConfig } from '@app/bmbp.types';
 

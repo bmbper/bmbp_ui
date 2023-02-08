@@ -5,8 +5,8 @@ import { BmbpLoginComponent } from './login/login.component';
 import { DevUIModule } from 'ng-devui';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RbacModule } from '../rbac/sys/rbac/rbac.module';
-import { PortalService } from '@app/home/portal/portal.service';
+import { RbacModule } from '@app/common/rbac/rbac.module';
+import { PortalService } from '@app/portal/portal/portal.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './portal/header/header.component';
 import { LogoComponent } from './portal/header/logo/logo.component';
@@ -36,4 +36,4 @@ import { WorkBeanchComponent } from './work-beanch/work-beanch.component';
   ],
   providers: [DevUIModule, PortalService],
 })
-export class HomeModule {}
+export class PortalModule {}

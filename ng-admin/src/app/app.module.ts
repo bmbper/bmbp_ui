@@ -4,11 +4,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
-import { HomeModule } from './home/home.module';
+import { PortalModule } from './portal/portal.module';
 import { httpInterceptorProviders, HttpService } from '@app/http.service';
 import { HttpClientModule } from '@angular/common/http';
 import { UtilService } from '@app/util.service';
-import { ComponentsModule } from '@app/components/components.module';
+import { ComponentsModule } from '@app/./components/components.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,7 +17,7 @@ import { ComponentsModule } from '@app/components/components.module';
     AppRoutingModule,
     RouterModule,
     DevUIModule,
-    HomeModule,
+    PortalModule,
     HttpClientModule,
     ComponentsModule,
   ],

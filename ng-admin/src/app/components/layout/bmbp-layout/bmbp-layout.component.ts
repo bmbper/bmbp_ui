@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { BmbpLayoutEnum } from '@app/components/layout/components';
+import { BmbpLayoutEnum } from 'src/app/components/layout/components';
 
 @Component({
   selector: 'app-bmbp-layout',

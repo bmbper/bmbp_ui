@@ -3,7 +3,7 @@ import {
   BmbpMenuQueryFrom,
   BmbpMenuVo,
   MenuService,
-} from 'src/app/rbac/sys/rbac/menu/menu.service';
+} from 'src/app/common/rbac/menu/menu.service';
 import {
   BmbpGrid,
   BmbpGridFieldType,
@@ -20,7 +20,7 @@ import {
   TreeNode,
 } from 'ng-devui';
 import { UtilService } from 'src/app/util.service';
-import { MenuFormComponent } from 'src/app/rbac/sys/rbac/menu/menu-form/menu-form.component';
+import { MenuFormComponent } from 'src/app/common/rbac/menu/menu-form/menu-form.component';
 
 @Component({
   selector: 'app-menu',
@@ -126,7 +126,7 @@ export class MenuComponent implements CrudService {
 
   onAddMenu() {
     const addMenuFormModal = this.dialog.open({
-      id: 'rbac-menu-add-form',
+      id: 'common-menu-add-form',
       width: '700px',
       maxHeight: '500px',
       title: '新增-菜单资源',
