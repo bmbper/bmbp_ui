@@ -13,6 +13,7 @@ import { LogoComponent } from './portal/header/logo/logo.component';
 import { NavComponent } from './portal/header/nav/nav.component';
 import { SetComponent } from './portal/header/set/set.component';
 import { ComponentsModule } from '@app/components/components.module';
+import { WorkBeanchComponent } from './work-beanch/work-beanch.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ComponentsModule } from '@app/components/components.module';
     LogoComponent,
     NavComponent,
     SetComponent,
+    WorkBeanchComponent,
   ],
   imports: [
     CommonModule,

@@ -2,7 +2,7 @@
     <div class="bmbp-breadcrumb-page-header">
         <d-breadcrumb>
             <d-breadcrumb-item *ngFor="let item of breadcrumbData">
-                <span>{{item}}</span>
+                <span (click)="onBreadcrumbClick($event,item)">{{item.title}}</span>
             </d-breadcrumb-item>
         </d-breadcrumb>
     </div>

@@ -9,6 +9,7 @@ import { MenuComponent } from './rbac/sys/rbac/menu/menu.component';
 import { ApiComponent } from './rbac/sys/rbac/api/api.component';
 import { RoleComponent } from './rbac/sys/rbac/role/role.component';
 import { DataComponent } from './rbac/sys/rbac/data/data.component';
+import { WorkBeanchComponent } from '@app/home/work-beanch/work-beanch.component';
 
 const routes: Routes = [
   { path: 'login', component: BmbpLoginComponent },
@@ -16,6 +17,10 @@ const routes: Routes = [
     path: 'portal',
     component: BmbpPortalComponent,
     children: [
+      {
+        path: 'workbench',
+        component: WorkBeanchComponent,
+      },
       {
         path: 'sys/rbac/organ',
         component: OrganComponent,

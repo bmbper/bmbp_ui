@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AccordionItemClickEvent, ToastService } from 'ng-devui';
+import { Router, RouterLink } from '@angular/router';
+import { AccordionItemClickEvent, SourceConfig, ToastService } from 'ng-devui';
 import { PortalService, NavMenuVo } from '@app/home/portal/portal.service';
 import { BmbpLayoutEnum } from '@app/components/layout/components';
+import { BmbpBreadcrumbConfig } from '@app/bmbp.types';
 
 @Component({
   selector: 'bmbp-portal',
@@ -11,8 +12,7 @@ import { BmbpLayoutEnum } from '@app/components/layout/components';
 })
 export class BmbpPortalComponent implements OnInit {
   rbacMenu: NavMenuVo[] = [];
-  breadCrumb: string[] = [];
-  breadCrumbData: any[] = [];
+  breadCrumbData: BmbpBreadcrumbConfig[] = [];
 
   portalConfig: {
     leftWidth?: string | number;
@@ -28,6 +28,11 @@ export class BmbpPortalComponent implements OnInit {
     },
   };
 
+  rootBreadData: BmbpBreadcrumbConfig = {
+    title: '工作台',
+    route: '/portal/workbench',
+  };
+
   constructor(
     private router: Router,
     private toastService: ToastService,
@@ -39,7 +44,8 @@ export class BmbpPortalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.router.navigateByUrl('portal/sys/rbac/menu').then((r) => {});
+    this.breadCrumbData = [this.rootBreadData];
+    this.router.navigateByUrl('portal/workbench').then((r) => {});
   }
 
   menuItemClick(event: AccordionItemClickEvent) {
@@ -58,13 +64,29 @@ export class BmbpPortalComponent implements OnInit {
   }
 
   private changeNavBreadCrumb(event: AccordionItemClickEvent): void {
-    let bread = [];
-    bread.push(event.item.title);
+    let bread: SourceConfig[] = [];
+    bread.push({
+      title: event.item.title,
+    });
     let parent = event.parent;
     while (parent) {
-      bread.push(parent.title);
+      bread.push({
+        title: parent.title,
+      });
       parent = parent.parent;
     }
-    this.breadCrumbData = bread.reverse();
+    this.breadCrumbData = [this.rootBreadData].concat(bread.reverse());
+  }
+
+  breadCrumbItemClick(breadItem: BmbpBreadcrumbConfig): void {
+    const curBreadCrumbData = [];
+    for (let item of this.breadCrumbData) {
+      curBreadCrumbData.push(item);
+      if (item.route == breadItem.route && item.title == breadItem.title) break;
+    }
+    this.breadCrumbData = curBreadCrumbData;
+    if (breadItem.route) {
+      this.router.navigateByUrl(breadItem.route).then((r) => {});
+    }
   }
 }
