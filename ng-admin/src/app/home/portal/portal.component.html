@@ -3,13 +3,13 @@
       <bmbp-portal-header [logWidth]="portalConfig.leftWidth"></bmbp-portal-header>
     </app-bmbp-layout-top>
     <app-bmbp-layout [layout]="portalConfig.centerLayout">
-        <app-bmbp-layout-left [width]="portalConfig.leftWidth">
+        <app-bmbp-layout-left [width]="portalConfig.leftWidth" style="border-right: 1px solid #F5F5F6;">
             <d-accordion (itemClick)="menuItemClick($event)"
                          [data]="rbacMenu" [showNoContent]=false
                          accordionType="embed"
                          class="bmbp-layout-aside-menu"></d-accordion>
         </app-bmbp-layout-left>
-        <app-bmbp-layout-center>
+        <app-bmbp-layout-center style="width: 100%">
             <bmbp-breadcrumb-page [breadcrumbData]="breadCrumbData" (breadcrumbItemClick)="breadCrumbItemClick($event)"
                                   style="height: 100%">
                 <router-outlet></router-outlet>
