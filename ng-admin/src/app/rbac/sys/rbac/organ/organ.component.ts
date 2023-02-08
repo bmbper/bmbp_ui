@@ -1,9 +1,28 @@
-import { Component, OnInit } from '@angular/core';
-import { TreeNode } from 'ng-devui';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import {
+  DialogService,
+  Dictionary,
+  FormLayout,
+  ToastService,
+  TreeComponent,
+  TreeNode,
+} from 'ng-devui';
 import {
   OrganService,
   OrganVo,
 } from 'src/app/rbac/sys/rbac/organ/organ.service';
+import {
+  BmbpMenuQueryFrom,
+  BmbpMenuVo,
+  MenuService,
+} from '@app/rbac/sys/rbac/menu/menu.service';
+import {
+  BmbpGrid,
+  BmbpGridFieldType,
+  BmbpGridQueryFrom,
+  BmbpTreeConfig,
+} from '@app/vo';
+import { UtilService } from '@app/util.service';
 
 @Component({
   selector: 'rbac-organ',
@@ -11,184 +30,188 @@ import {
   styleUrls: ['./organ.component.scss'],
 })
 export class OrganComponent implements OnInit {
-  data = [
-    {
-      title: 'parent node 1 - expanded',
-      open: true,
-      items: [
-        {
-          title: 'parent node 11 - folded',
-          items: [
-            {
-              title: 'leaf node 111',
-            },
-            {
-              title: 'leaf node 112',
-            },
-            {
-              title: 'leaf node 113',
-            },
-            {
-              title: 'leaf node 114',
-            },
-          ],
-        },
-        {
-          title: 'parent node 12 - folded',
-          items: [
-            {
-              title: 'leaf node 121',
-            },
-            {
-              title: 'leaf node 122',
-            },
-            {
-              title: 'leaf node 123',
-            },
-            {
-              title: 'leaf node 124',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      title: 'parent node 2 - folded',
-      items: [
-        {
-          title: 'parent node 21 - expanded',
-          open: true,
-          items: [
-            {
-              title: 'leaf node 211',
-            },
-            {
-              title: 'leaf node 212',
-            },
-            {
-              title: 'leaf node 213',
-            },
-            {
-              title: 'leaf node 214',
-            },
-          ],
-        },
-        {
-          title: 'parent node 22 - folded',
-          items: [
-            {
-              title: 'leaf node 221',
-            },
-            {
-              title: 'leaf node 222',
-            },
-            {
-              title: 'leaf node 223',
-            },
-            {
-              title: 'leaf node 224',
-            },
-          ],
-        },
-        {
-          title: 'parent node 23 - folded',
-          items: [
-            {
-              title: 'leaf node 231',
-            },
-            {
-              title: 'leaf node 232',
-            },
-            {
-              title: 'leaf node 233',
-            },
-            {
-              title: 'leaf node 234',
-            },
-          ],
-        },
-      ],
-    },
-  ];
-  basicDataSource = [
-    {
-      id: 1,
-      firstName: 'Mark',
-      lastName: 'Otto',
-      dob: new Date(1990, 12, 1),
-      gender: 'Male',
-      description: 'handsome man',
-    },
-    {
-      id: 2,
-      firstName: 'Jacob',
-      lastName: 'Thornton',
-      gender: 'Female',
-      dob: new Date(1989, 1, 1),
-      description: 'interesting man',
-    },
-    {
-      id: 3,
-      firstName: 'Danni',
-      lastName: 'Chen',
-      gender: 'Female',
-      dob: new Date(1991, 3, 1),
-      description: 'pretty man',
-      expandConfig: { description: 'Danni is here' },
-    },
-    {
-      id: 4,
-      firstName: 'green',
-      lastName: 'gerong',
-      gender: 'Male',
-      description: 'interesting man',
-      dob: new Date(1991, 3, 1),
-    },
-  ];
-  dataTableOptions = {
-    columns: [
+  @ViewChild('organTree', { static: true })
+  organTree: TreeComponent | undefined;
+  organTreeData: BmbpMenuVo[] = [];
+  organTreeConfig: BmbpTreeConfig = {
+    nodeTitle: 'menuTitle',
+    nodeKey: 'menuId',
+    nodeChildren: 'children',
+  };
+  selectOrganTreeNode: BmbpMenuVo = {};
+  selectOrganRowNode: BmbpMenuVo = {};
+
+  selectOptions = {
+    organType: [
       {
-        field: 'firstName',
-        header: 'First Name',
-        fieldType: 'text',
-        order: 1,
+        label: 'URL',
+        value: 'URL',
       },
       {
-        field: 'lastName',
-        header: 'Last Name',
-        fieldType: 'text',
-        order: 2,
+        label: '路由',
+        value: 'ROUTE',
       },
       {
-        field: 'gender',
-        header: 'Gender',
-        fieldType: 'text',
-        order: 3,
-      },
-      {
-        field: 'dob',
-        header: 'Date of birth',
-        fieldType: 'date',
-        order: 4,
+        label: '配置',
+        value: 'META',
       },
     ],
   };
-  organ: OrganVo;
+  organGridQueryForm: BmbpGridQueryFrom<BmbpMenuQueryFrom> = {
+    data: {
+      menuTitle: '',
+      parentMenuPath: '',
+    },
+    fieldLayout: FormLayout.Horizontal,
+  };
+  organGrid: BmbpGrid<BmbpMenuVo> = {
+    config: {
+      borderType: 'bordered',
+    },
+    columns: [
+      {
+        header: '资源名称',
+        field: 'menuTitle',
+        fieldType: BmbpGridFieldType.Text,
+      },
+      {
+        header: '资源类型',
+        field: 'menuRouteType',
+        fieldType: BmbpGridFieldType.Text,
+      },
+      {
+        header: '资源地址',
+        field: 'menuRoute',
+        fieldType: BmbpGridFieldType.Text,
+      },
+      {
+        header: '资源路径',
+        field: 'menuPath',
+        fieldType: BmbpGridFieldType.Text,
+      },
+    ],
+    data: {
+      total: 0,
+      pageSize: 20,
+      pageNo: 0,
+      data: [],
+    },
+  };
 
-  constructor(private service: OrganService) {
-    this.organ = {};
-    this.service.say().subscribe((vo) => {
-      this.organ = vo.data;
+  constructor(
+    private service: MenuService,
+    private toast: ToastService,
+    public util: UtilService,
+    private dialog: DialogService
+  ) {
+    this.service.findMenuTree().subscribe((vo) => {
+      this.organTreeData = vo.data;
     });
   }
 
-  ngOnInit(): void {}
-
-  onNodeSelected(treeNode: TreeNode) {
-    console.log('selected', treeNode);
+  ngOnInit(): void {
+    console.log('1');
   }
 
-  onNodeToggled(treeNode: TreeNode) {
-    console.log('Toggled', treeNode);
+  ngAfterViewInit() {}
+
+  onOrganItemClick(event: TreeNode) {
+    this.organGridQueryForm.data.parentMenuId = event.data.originItem.menuId;
+    this.organGridQueryForm.data.parentMenuPath =
+      event.data.originItem.menuPath;
+    this.selectOrganTreeNode = event.data.originItem;
+    this.loadGridData();
+  }
+
+  onOrganMenu() {
+    const addMenuFormModal = this.dialog.open({
+      id: 'rbac-menu-add-form',
+      width: '700px',
+      maxHeight: '500px',
+      title: '新增-菜单资源',
+      content: '',
+      backdropCloseable: true,
+      buttons: [
+        {
+          cssClass: 'primary',
+          text: '提交',
+          handler: ($event: Event) => {},
+        },
+        {
+          cssClass: 'common',
+          text: '取消',
+          handler: ($event: Event) => {
+            addMenuFormModal.modalInstance.hide();
+          },
+        },
+      ],
+    });
+  }
+
+  loadGridData() {
+    let params = this.organGridQueryForm.data;
+    this.service.findMenuGrid(params).subscribe((vo) => {
+      this.organGrid.data = vo.data;
+    });
+  }
+
+  onOrganGridPageNoChange(pageNo: number) {
+    alert(pageNo);
+  }
+
+  onOrganGridPageSizeChange(pageSize: number) {
+    alert(pageSize);
+  }
+
+  onQueryFormDataClear() {
+    this.organGridQueryForm.data = {};
+    this.onQueryGrid();
+  }
+
+  onQueryGrid() {
+    this.loadGridData();
+  }
+
+  onAddSubOrgan($event: MouseEvent, rowItem: any): void {
+    this.toast.open({
+      value: [{ severity: 'info', summary: '提醒', content: '功能开发中' }],
+    });
+  }
+
+  onChangeParent($event: MouseEvent, rowItem: any): void {
+    this.toast.open({
+      value: [{ severity: 'info', summary: '提醒', content: '功能开发中' }],
+    });
+  }
+
+  onEditRow($event: MouseEvent, rowItem: any): void {
+    this.toast.open({
+      value: [{ severity: 'info', summary: '提醒', content: '功能开发中' }],
+    });
+  }
+
+  onViewRow($event: MouseEvent, rowItem: any): void {
+    this.toast.open({
+      value: [{ severity: 'info', summary: '提醒', content: '功能开发中' }],
+    });
+  }
+
+  onDeleteRow($event: MouseEvent, rowItem: any): void {
+    this.toast.open({
+      value: [{ severity: 'info', summary: '提醒', content: '功能开发中' }],
+    });
+  }
+
+  afterLeftTreeInit($event: Dictionary<TreeNode>) {
+    if (this.organTree && this.organTreeData.length > 0) {
+      let firstTreeNodeData: BmbpMenuVo = this.organTreeData[0];
+      let treeNode = this.organTree.treeFactory.getCompleteNodeById(
+        firstTreeNodeData.menuId || ''
+      );
+      if (treeNode) {
+        this.onOrganItemClick(treeNode);
+        this.organTree.treeFactory.activeNodeById('1');
+      }
+    }
   }
 }
