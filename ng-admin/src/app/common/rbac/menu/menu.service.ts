@@ -31,8 +31,8 @@ export interface BmbpMenuQueryFrom {
 @Injectable()
 export class MenuService implements OnInit {
   VoURL = {
-    menuTree: 'common/v1/menu/tree',
-    menuPage: 'common/v1/menu/page',
+    menuTree: 'rbac/v1/menu/tree',
+    menuPage: 'rbac/v1/menu/page',
   };
 
   ngOnInit(): void {}

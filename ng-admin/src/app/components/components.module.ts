@@ -9,6 +9,7 @@ import { BmbpLayoutRightComponent } from './layout/bmbp-layout-right/bmbp-layout
 import { BreadcrumbPageComponent } from './page/breadcump-page/breadcrumb-page.component';
 import { RouterLinkWithHref, RouterOutlet } from '@angular/router';
 import { BreadcrumbModule } from 'ng-devui';
+import { BmbpNotFoundComponent } from '@app/components/err/notfound/notfound.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { BreadcrumbModule } from 'ng-devui';
     BmbpLayoutLeftComponent,
     BmbpLayoutRightComponent,
     BreadcrumbPageComponent,
+    BmbpNotFoundComponent,
   ],
   exports: [
     BmbpLayoutComponent,
@@ -27,6 +29,7 @@ import { BreadcrumbModule } from 'ng-devui';
     BmbpLayoutLeftComponent,
     BmbpLayoutCenterComponent,
     BreadcrumbPageComponent,
+    BmbpNotFoundComponent,
   ],
   imports: [CommonModule, RouterOutlet, BreadcrumbModule, RouterLinkWithHref],
 })

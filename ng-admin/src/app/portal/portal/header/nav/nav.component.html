@@ -2,4 +2,15 @@
     <div class="toggle-icon">
         <img src="assets/images/portal/reorder-vertical.png"/>
     </div>
+    <div class="nav-menu">
+        <div class="nav-menu-item" [ngClass]="{'active':item.isActive}" *ngFor="let item of curNavData"
+             (click)="onAppNavItemClick(item)">
+            {{
+            item.appTitle
+            }}
+        </div>
+    </div>
+    <div class="nav-more">
+        <d-icon [icon]="'icon-more-operate'" [color]="'#FFFFFF'" *ngIf="moreNavData.length>0"></d-icon>
+    </div>
 </div>

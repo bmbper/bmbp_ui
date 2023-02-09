@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { AppVo } from '@app/bmbp.types';
 
 @Component({
   selector: 'bmbp-portal-header',
@@ -7,4 +8,5 @@ import { Component, Input } from '@angular/core';
 })
 export class HeaderComponent {
   @Input() logWidth: string | number | undefined = '160px';
+  @Input() appNavData: AppVo[] = [];
 }
