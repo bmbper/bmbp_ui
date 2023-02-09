@@ -1,11 +1,14 @@
 <div>
-    <form dForm [layout]="layoutDirection" ngForm [labelSize]="'sm'" [labelAlign]="'end'">
+    <form dForm [layout]="layoutDirection" ngForm [labelSize]="'sm'" [labelAlign]="'end'" (dSubmit)="saveMenu($event)">
         <d-row [dGutter]="24">
             <d-col [dSpan]="24">
                 <d-form-item>
-                    <d-form-label>上级资源</d-form-label>
+                    <d-form-label>
+                        上级菜单ID:
+                    </d-form-label>
                     <d-form-control>
-                        <input dTextInput [(ngModel)]="menuData.menuTitle" [disabled]="true"/>
+                        <input disabled [(ngModel)]="menuData.parentMenuId" autocomplete="off" dTextInput
+                               name="parentMenuId"/>
                     </d-form-control>
                 </d-form-item>
             </d-col>
@@ -13,7 +16,12 @@
                 <d-form-item>
                     <d-form-label [required]="true">资源名称</d-form-label>
                     <d-form-control>
-                        <input dTextInput name="menuTitle" [(ngModel)]="menuData.menuTitle"/>
+                        <input dTextInput name="menuTitle" [(ngModel)]="menuData.menuTitle"
+                               [dValidateRules]="[
+                               { required: true },
+                               { whitespace: false },
+                               { minlength: 2 },
+                               { maxlength: 36 },]"/>
                     </d-form-control>
                 </d-form-item>
             </d-col>
@@ -22,41 +30,54 @@
                 <d-form-item>
                     <d-form-label [required]="true">资源类型</d-form-label>
                     <d-form-control>
-                        <input dTextInput name="menuType" [(ngModel)]="menuData.menuTitle"/>
+                        <d-select
+                                [options]="selectOptions.menuType"
+                                [ngModel]="menuData.menuType|dictValuePipe:selectOptions.menuType"
+                                (ngModelChange)="menuData.menuType = $event.value"
+                                [filterKey]="'label'"
+                                [allowClear]="true"
+                                name="menuType"
+                                [dValidateRules]="[{ required: true }]">
+
+                        </d-select>
                     </d-form-control>
                 </d-form-item>
             </d-col>
 
             <d-col [dSpan]="12">
-                <d-form-item>
+                <d-form-item *ngIf="menuData.menuType=='func'">
                     <d-form-label [required]="true">访问类型</d-form-label>
                     <d-form-control>
-                        <input dTextInput name="menuRouteType" [(ngModel)]="menuData.menuRouteType"/>
+                        <d-select
+                                [options]="selectOptions.menuRouteType"
+                                [ngModel]="menuData.menuRouteType|dictValuePipe:selectOptions.menuRouteType"
+                                (ngModelChange)="menuData.menuRouteType = $event.value"
+                                [filterKey]="'label'"
+                                [allowClear]="true"
+                                name="menuRouteType"
+                                [dValidateRules]="[{ required: true }]">>
+                        </d-select>
                     </d-form-control>
                 </d-form-item>
             </d-col>
             <d-col [dSpan]="24">
-                <d-form-item>
+                <d-form-item *ngIf="menuData.menuType=='func'">
                     <d-form-label [required]="true">访问路径</d-form-label>
                     <d-form-control>
-                        <input dTextInput name="menuRoute" [(ngModel)]="menuData.menuRoute"/>
+                        <input dTextInput name="menuRoute" [(ngModel)]="menuData.menuRoute" [dValidateRules]="[
+                               { required: true },
+                               { whitespace: false },
+                               { minlength: 4 },
+                               { maxlength: 36 },]"/>
                     </d-form-control>
                 </d-form-item>
             </d-col>
-            <d-col [dSpan]="12">
-
-            </d-col>
-            <d-col [dSpan]="12">
-
-            </d-col>
-            <d-col [dSpan]="12">
-
-            </d-col>
-            <d-col [dSpan]="12">
-
-            </d-col>
-            <d-col [dSpan]="12">
-
+            <d-col [dSpan]="24">
+                <d-form-operation class="form-operation">
+                    <d-button class="mr-element-spacing" style="margin-right: 8px" dFormSubmit>保存
+                    </d-button>
+                    <d-button bsStyle="common" (click)="onResetFormData()">取消</d-button>
+                </d-form-operation>
             </d-col>
         </d-row>
     </form>

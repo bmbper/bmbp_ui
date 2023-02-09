@@ -2,21 +2,15 @@ import { Injectable, OnInit } from '@angular/core';
 import { BaseVo, Page, RespVo } from 'src/app/vo';
 import { HttpService } from 'src/app/http.service';
 import { Observable } from 'rxjs';
-import { UtilService } from 'src/app/util.service';
-
-export enum BmbpMenuType {
-  Route = 'route',
-  URL = 'url',
-  META = 'meta',
-}
 
 export interface BmbpMenuVo extends BaseVo {
   menuId?: string;
   parentMenuId?: string;
   menuTitle?: string;
+  menuType?: string;
   menuPath?: string;
   menuRoute?: string;
-  menuRouteType?: BmbpMenuType;
+  menuRouteType?: string;
   children?: BmbpMenuVo[];
   appId?: string;
 }

@@ -21,6 +21,7 @@ import {
 } from 'ng-devui';
 import { UtilService } from 'src/app/util.service';
 import { MenuFormComponent } from 'src/app/common/rbac/menu/menu-form/menu-form.component';
+import { AppMenuRouteDict } from '@app/dict';
 
 @Component({
   selector: 'app-menu',
@@ -43,21 +44,11 @@ export class MenuComponent implements CrudService {
     | TemplateRef<any>
     | undefined;
 
+  @ViewChild('addSubMenuDialog', { static: true }) addSubMenuDialog:
+    | TemplateRef<any>
+    | undefined;
   selectOptions = {
-    menuRouteType: [
-      {
-        label: 'URL',
-        value: 'URL',
-      },
-      {
-        label: '路由',
-        value: 'ROUTE',
-      },
-      {
-        label: '配置',
-        value: 'META',
-      },
-    ],
+    menuRouteType: AppMenuRouteDict,
   };
   menuGridQueryForm: BmbpGridQueryFrom<BmbpMenuQueryFrom> = {
     data: {
@@ -128,24 +119,11 @@ export class MenuComponent implements CrudService {
     const addMenuFormModal = this.dialog.open({
       id: 'common-menu-add-form',
       width: '700px',
-      maxHeight: '500px',
-      title: '新增-菜单资源',
+      maxHeight: '700px',
+      title: '新增',
       contentTemplate: this.addMenuDialog,
       backdropCloseable: true,
-      buttons: [
-        {
-          cssClass: 'primary',
-          text: '提交',
-          handler: ($event: Event) => {},
-        },
-        {
-          cssClass: 'common',
-          text: '取消',
-          handler: ($event: Event) => {
-            addMenuFormModal.modalInstance.hide();
-          },
-        },
-      ],
+      buttons: [],
     });
   }
 
@@ -173,7 +151,17 @@ export class MenuComponent implements CrudService {
     this.loadMenuGridData();
   }
 
-  onAddSubMenu($event: MouseEvent, rowItem: any): void {
+  onAddSubMenu($event: MouseEvent, rowItem: BmbpMenuVo): void {
+    this.selectMenuRowNode = rowItem;
+    const addMenuFormModal = this.dialog.open({
+      id: 'common-menu-add-form',
+      width: '700px',
+      maxHeight: '700px',
+      title: '新增',
+      contentTemplate: this.addSubMenuDialog,
+      backdropCloseable: true,
+      buttons: [],
+    });
     this.toast.open({
       value: [{ severity: 'info', summary: '提醒', content: '功能开发中' }],
     });

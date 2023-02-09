@@ -1,6 +1,5 @@
-import { SelectItem, SelectOptions } from './vo';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { DictItem } from '@app/dict';
 
 @Injectable({
   providedIn: 'root',
@@ -8,13 +7,11 @@ import { HttpClient } from '@angular/common/http';
 export class UtilService {
   constructor() {}
 
-  dictLabel(value: any, options: SelectOptions): any {
-    for (let i = 0; i < options.length; i++) {
-      let item: SelectItem = options[i];
-      if (item.value == value) {
-        return item.label;
-      }
-    }
+  dictLabel(value: any, options: DictItem[]): any {
+    let item: DictItem | undefined = options.find(
+      (item) => item.value == value
+    );
+    if (item) return item.label;
     return value;
   }
 

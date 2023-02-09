@@ -1,11 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { SelectItem, SelectOptions } from './vo';
+import { DictItem } from '@app/dict';
 
 @Pipe({ name: 'dictValuePipe' })
 export class DictValuePipe implements PipeTransform {
-  transform(data: any, selectOptions: SelectItem[]): any {
+  transform(data: any, selectOptions: DictItem[]): any {
     for (let i = 0; i < selectOptions.length; i++) {
-      let item: SelectItem = selectOptions[i];
+      let item: DictItem = selectOptions[i];
       if (item.value === data) {
         return item.label;
       }
