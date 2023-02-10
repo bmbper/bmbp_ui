@@ -19,7 +19,7 @@ import {
   BmbpGridQueryFrom,
   BmbpTreeConfig,
 } from 'src/app/vo';
-import { UtilService } from 'src/app/util.service';
+import { BmbpService } from '@app/bmbp.service';
 
 @Component({
   selector: 'common-organ',
@@ -98,7 +98,7 @@ export class OrganComponent implements OnInit {
   constructor(
     private service: MenuService,
     private toast: ToastService,
-    public util: UtilService,
+    public util: BmbpService,
     private dialog: DialogService
   ) {
     this.service.findMenuTree().subscribe((vo) => {

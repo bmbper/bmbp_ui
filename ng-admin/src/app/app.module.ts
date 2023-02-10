@@ -7,8 +7,8 @@ import { RouterModule } from '@angular/router';
 import { PortalModule } from './portal/portal.module';
 import { httpInterceptorProviders, HttpService } from '@app/http.service';
 import { HttpClientModule } from '@angular/common/http';
-import { UtilService } from '@app/util.service';
 import { ComponentsModule } from '@app/./components/components.module';
+import { BmbpService } from '@app/bmbp.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,7 +21,7 @@ import { ComponentsModule } from '@app/./components/components.module';
     HttpClientModule,
     ComponentsModule,
   ],
-  providers: [DevUIModule, httpInterceptorProviders, HttpService, UtilService],
+  providers: [DevUIModule, httpInterceptorProviders, HttpService, BmbpService],
   bootstrap: [AppComponent],
   exports: [],
 })

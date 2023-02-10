@@ -1,4 +1,4 @@
-import { Component, ElementRef, TemplateRef, ViewChild } from '@angular/core';
+import { Component, Input, TemplateRef, ViewChild } from '@angular/core';
 import {
   BmbpMenuQueryFrom,
   BmbpMenuVo,
@@ -19,9 +19,8 @@ import {
   TreeComponent,
   TreeNode,
 } from 'ng-devui';
-import { UtilService } from 'src/app/util.service';
-import { MenuFormComponent } from 'src/app/common/rbac/menu/menu-form/menu-form.component';
 import { AppMenuRouteDict } from '@app/dict';
+import { BmbpService } from '@app/bmbp.service';
 
 @Component({
   selector: 'app-menu',
@@ -32,21 +31,20 @@ export class MenuComponent implements CrudService {
   @ViewChild('menuTree', { static: true })
   menuTree: TreeComponent | undefined;
   menuTreeData: BmbpMenuVo[] = [];
+
   menuTreeConfig: BmbpTreeConfig = {
     nodeTitle: 'menuTitle',
     nodeKey: 'menuId',
     nodeChildren: 'children',
   };
+
   selectMenuTreeNode: BmbpMenuVo = {};
-  selectMenuRowNode: BmbpMenuVo = {};
+  menuFormDialogData: BmbpMenuVo = {};
 
-  @ViewChild('addMenuDialog', { static: true }) addMenuDialog:
+  @ViewChild('menuFormDialog', { static: true }) menuFormDialog:
     | TemplateRef<any>
     | undefined;
 
-  @ViewChild('addSubMenuDialog', { static: true }) addSubMenuDialog:
-    | TemplateRef<any>
-    | undefined;
   selectOptions = {
     menuRouteType: AppMenuRouteDict,
   };
@@ -94,7 +92,7 @@ export class MenuComponent implements CrudService {
   constructor(
     private service: MenuService,
     private toast: ToastService,
-    public util: UtilService,
+    public util: BmbpService,
     private dialog: DialogService
   ) {
     this.service.findMenuTree().subscribe((vo) => {
@@ -102,9 +100,7 @@ export class MenuComponent implements CrudService {
     });
   }
 
-  ngOnInit(): void {
-    console.log('1');
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit() {}
 
@@ -116,15 +112,7 @@ export class MenuComponent implements CrudService {
   }
 
   onAddMenu() {
-    const addMenuFormModal = this.dialog.open({
-      id: 'common-menu-add-form',
-      width: '700px',
-      maxHeight: '700px',
-      title: '新增',
-      contentTemplate: this.addMenuDialog,
-      backdropCloseable: true,
-      buttons: [],
-    });
+    this.openMenuForm(this.selectMenuTreeNode);
   }
 
   loadMenuGridData() {
@@ -152,43 +140,36 @@ export class MenuComponent implements CrudService {
   }
 
   onAddSubMenu($event: MouseEvent, rowItem: BmbpMenuVo): void {
-    this.selectMenuRowNode = rowItem;
-    const addMenuFormModal = this.dialog.open({
+    this.openMenuForm(rowItem);
+  }
+
+  openMenuForm(rowItem: BmbpMenuVo): void {
+    this.menuFormDialogData = rowItem;
+    this.dialog.open({
       id: 'common-menu-add-form',
       width: '700px',
       maxHeight: '700px',
       title: '新增',
-      contentTemplate: this.addSubMenuDialog,
+      contentTemplate: this.menuFormDialog,
       backdropCloseable: true,
       buttons: [],
-    });
-    this.toast.open({
-      value: [{ severity: 'info', summary: '提醒', content: '功能开发中' }],
     });
   }
 
   onChangeParent($event: MouseEvent, rowItem: any): void {
-    this.toast.open({
-      value: [{ severity: 'info', summary: '提醒', content: '功能开发中' }],
-    });
+    this.util.info('提醒', '功能开发中');
   }
 
   onEditMenu($event: MouseEvent, rowItem: any): void {
-    this.toast.open({
-      value: [{ severity: 'info', summary: '提醒', content: '功能开发中' }],
-    });
+    this.util.info('提醒', '功能开发中');
   }
 
   onViewMenu($event: MouseEvent, rowItem: any): void {
-    this.toast.open({
-      value: [{ severity: 'info', summary: '提醒', content: '功能开发中' }],
-    });
+    this.util.info('提醒', '功能开发中');
   }
 
   onDeleteMenu($event: MouseEvent, rowItem: any): void {
-    this.toast.open({
-      value: [{ severity: 'info', summary: '提醒', content: '功能开发中' }],
-    });
+    this.util.info('提醒', '功能开发中');
   }
 
   afterMenuTreeInit($event: Dictionary<TreeNode>) {
@@ -199,7 +180,7 @@ export class MenuComponent implements CrudService {
       );
       if (treeNode) {
         this.onMenuItemClick(treeNode);
-        this.menuTree.treeFactory.activeNodeById('1');
+        this.menuTree.treeFactory.activeNodeById(treeNode.id);
       }
     }
   }

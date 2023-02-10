@@ -27,6 +27,7 @@ export class MenuService implements OnInit {
   VoURL = {
     menuTree: 'rbac/v1/menu/tree',
     menuPage: 'rbac/v1/menu/page',
+    saveMenu: 'rbac/v1/menu/save',
   };
 
   ngOnInit(): void {}
@@ -34,9 +35,7 @@ export class MenuService implements OnInit {
   constructor(private http: HttpService) {}
 
   findMenuTree(): Observable<RespVo<BmbpMenuVo[]>> {
-    return this.http.post<RespVo<BmbpMenuVo[]>>(this.VoURL.menuTree, {
-      appId: '0',
-    });
+    return this.http.post<RespVo<BmbpMenuVo[]>>(this.VoURL.menuTree);
   }
 
   findMenuGrid(params: BmbpMenuQueryFrom) {
@@ -44,5 +43,9 @@ export class MenuService implements OnInit {
       this.VoURL.menuPage,
       params
     );
+  }
+
+  save(menuData: BmbpMenuVo): Observable<RespVo<BmbpMenuVo>> {
+    return this.http.post<RespVo<BmbpMenuVo>>(this.VoURL.saveMenu, menuData);
   }
 }

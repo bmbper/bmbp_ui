@@ -26,9 +26,10 @@ export class HttpService {
     });
   }
 
-  post<T>(url: string, params: any): Observable<T> {
+  post<T>(url: string, params?: any): Observable<T> {
+    let reqData = JSON.stringify(params || {});
     return this.http
-      .post<T>(url, JSON.stringify(params), {
+      .post<T>(url, reqData, {
         headers: {
           'Content-Type': 'application/json',
         },
