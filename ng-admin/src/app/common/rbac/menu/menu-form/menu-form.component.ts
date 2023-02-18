@@ -1,8 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormLayout } from 'ng-devui/form';
 import { ModalComponent } from 'ng-devui';
 import { BmbpMenuVo, MenuService } from 'src/app/common/rbac/menu/menu.service';
-import { AppMenuDict, AppMenuRouteDict } from '@app/dict';
+import { AppMenuTypeDict, AppMenuRouteDict } from '@app/dict';
 import { BmbpService } from '@app/bmbp.service';
 
 @Component({
@@ -14,14 +14,18 @@ export class MenuFormComponent implements OnInit {
   @Input() data: BmbpMenuVo = {};
   @Input() modalInstance: ModalComponent | undefined;
   @Input() modalContentInstance: any;
+
+  @Output() afterFormSave: EventEmitter<boolean> = new EventEmitter<boolean>();
   layoutDirection: FormLayout = FormLayout.Horizontal;
 
   menuData: BmbpMenuVo = {};
 
   selectOptions = {
     menuRouteType: AppMenuRouteDict,
-    menuType: AppMenuDict,
+    menuType: AppMenuTypeDict,
   };
+
+  showRouteInfo: String = 'FUNC';
 
   constructor(private bmbp: BmbpService, private menuService: MenuService) {}
 
@@ -34,6 +38,9 @@ export class MenuFormComponent implements OnInit {
       this.menuService.save(this.menuData).subscribe((vo) => {
         if (vo.code == 0) {
           this.menuData = vo.data;
+          this.bmbp.info('信息', '保存成功!');
+          this.modalInstance?.hide();
+          this.afterFormSave.emit(true);
         } else {
           this.bmbp.error('错误', vo.msg);
         }
@@ -41,7 +48,7 @@ export class MenuFormComponent implements OnInit {
     }
   }
 
-  onResetFormData() {
-    this.menuData = { parentMenuId: this.data?.menuId };
+  onCloseMenuForm() {
+    this.modalInstance?.hide();
   }
 }

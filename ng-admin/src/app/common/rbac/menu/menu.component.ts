@@ -19,7 +19,7 @@ import {
   TreeComponent,
   TreeNode,
 } from 'ng-devui';
-import { AppMenuRouteDict } from '@app/dict';
+import { AppMenuRouteDict, AppMenuTypeDict } from '@app/dict';
 import { BmbpService } from '@app/bmbp.service';
 
 @Component({
@@ -47,6 +47,7 @@ export class MenuComponent implements CrudService {
 
   selectOptions = {
     menuRouteType: AppMenuRouteDict,
+    menuType: AppMenuTypeDict,
   };
   menuGridQueryForm: BmbpGridQueryFrom<BmbpMenuQueryFrom> = {
     data: {
@@ -67,16 +68,21 @@ export class MenuComponent implements CrudService {
       },
       {
         header: '资源类型',
+        field: 'menuType',
+        fieldType: BmbpGridFieldType.Text,
+      },
+      {
+        header: '访问类型',
         field: 'menuRouteType',
         fieldType: BmbpGridFieldType.Text,
       },
       {
-        header: '资源地址',
+        header: '访问地址',
         field: 'menuRoute',
         fieldType: BmbpGridFieldType.Text,
       },
       {
-        header: '资源路径',
+        header: '资源层级',
         field: 'menuPath',
         fieldType: BmbpGridFieldType.Text,
       },
@@ -95,9 +101,7 @@ export class MenuComponent implements CrudService {
     public util: BmbpService,
     private dialog: DialogService
   ) {
-    this.service.findMenuTree().subscribe((vo) => {
-      this.menuTreeData = vo.data;
-    });
+    this.loadMenuTreeData();
   }
 
   ngOnInit(): void {}
@@ -113,6 +117,12 @@ export class MenuComponent implements CrudService {
 
   onAddMenu() {
     this.openMenuForm(this.selectMenuTreeNode);
+  }
+
+  loadMenuTreeData() {
+    this.service.findMenuTree().subscribe((vo) => {
+      this.menuTreeData = vo.data;
+    });
   }
 
   loadMenuGridData() {
@@ -182,6 +192,12 @@ export class MenuComponent implements CrudService {
         this.onMenuItemClick(treeNode);
         this.menuTree.treeFactory.activeNodeById(treeNode.id);
       }
+    }
+  }
+
+  afterMenuFormSave(reload: boolean): void {
+    if (reload) {
+      this.loadMenuTreeData();
     }
   }
 }

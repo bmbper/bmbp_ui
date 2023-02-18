@@ -14,36 +14,36 @@ export const AppTypeDict: DictItem[] = [
   },
   {
     label: '原生应用',
-    value: 'code',
+    value: 'CODE',
   },
 ];
 
-export const AppMenuDict: DictItem[] = [
+export const AppMenuTypeDict: DictItem[] = [
   {
     label: '模块',
-    value: 'module',
+    value: 'MODULE',
   },
   {
     label: '功能',
-    value: 'func',
+    value: 'FUNC',
   },
 ];
 
 export const AppMenuRouteDict: DictItem[] = [
   {
-    value: 'meta',
+    value: 'META',
     label: '配置',
   },
   {
-    value: 'route',
+    value: 'ROUTE',
     label: '路由',
   },
   {
-    value: 'url',
+    value: 'URL',
     label: 'URL',
   },
   {
-    value: 'out',
+    value: 'OUT',
     label: '外部',
   },
 ];

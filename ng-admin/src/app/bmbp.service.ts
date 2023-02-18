@@ -27,6 +27,9 @@ export class BmbpService {
   }
 
   dictLabel(value: any, options: DictItem[]): any {
+    if (value == null) {
+      return '--';
+    }
     let item: DictItem | undefined = options.find(
       (item) => item.value == value
     );

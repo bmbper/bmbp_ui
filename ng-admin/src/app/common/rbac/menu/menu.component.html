@@ -69,6 +69,11 @@
                         [field]="colOption.field"
                         [header]="colOption.header"
                         [width]="'150px'">
+                    <d-cell *ngIf="colOption.field =='menuType'">
+                        <ng-template let-cellItem="cellItem">
+                            {{util.dictLabel(cellItem, selectOptions.menuType)}}
+                        </ng-template>
+                    </d-cell>
                     <d-cell *ngIf="colOption.field =='menuRouteType'">
                         <ng-template let-cellItem="cellItem">
                             {{util.dictLabel(cellItem, selectOptions.menuRouteType)}}
@@ -119,6 +124,7 @@
     </div>
     <ng-template #menuFormDialog let-modalInstance="modalInstance" let-modalContentInstance="modalContentInstance">
         <app-menu-form [data]="menuFormDialogData" [modalInstance]="modalInstance"
-                       [modalContentInstance]="modalContentInstance"></app-menu-form>
+                       [modalContentInstance]="modalContentInstance"
+                       (afterFormSave)="afterMenuFormSave($event)"></app-menu-form>
     </ng-template>
 </div>

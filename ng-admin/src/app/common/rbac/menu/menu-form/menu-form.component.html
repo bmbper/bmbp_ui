@@ -38,14 +38,13 @@
                                 [allowClear]="true"
                                 name="menuType"
                                 [dValidateRules]="[{ required: true }]">
-
                         </d-select>
                     </d-form-control>
                 </d-form-item>
             </d-col>
 
             <d-col [dSpan]="12">
-                <d-form-item *ngIf="menuData.menuType=='func'">
+                <d-form-item *ngIf="menuData.menuType==showRouteInfo">
                     <d-form-label [required]="true">访问类型</d-form-label>
                     <d-form-control>
                         <d-select
@@ -61,7 +60,7 @@
                 </d-form-item>
             </d-col>
             <d-col [dSpan]="24">
-                <d-form-item *ngIf="menuData.menuType=='func'">
+                <d-form-item *ngIf="menuData.menuType==showRouteInfo">
                     <d-form-label [required]="true">访问路径</d-form-label>
                     <d-form-control>
                         <input dTextInput name="menuRoute" [(ngModel)]="menuData.menuRoute" [dValidateRules]="[
@@ -76,7 +75,7 @@
                 <d-form-operation class="form-operation">
                     <d-button class="mr-element-spacing" style="margin-right: 8px" dFormSubmit>保存
                     </d-button>
-                    <d-button bsStyle="common" (click)="onResetFormData()">取消</d-button>
+                    <d-button bsStyle="common" (click)="onCloseMenuForm()">取消</d-button>
                 </d-form-operation>
             </d-col>
         </d-row>
