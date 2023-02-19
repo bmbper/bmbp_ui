@@ -28,7 +28,7 @@ export class HttpService {
       })
       .pipe(
         catchError((err: HttpErrorResponse) => {
-          this.bmbp.error('请求错误', err.error);
+          this.bmbp.error(err.error);
           return throwError(() => new Error(err.message));
         })
       );
@@ -44,7 +44,7 @@ export class HttpService {
       })
       .pipe(
         catchError((err: HttpErrorResponse) => {
-          this.bmbp.error('请求错误', err.error);
+          this.bmbp.error(err.error);
           return throwError(() => new Error(err.message));
         })
       );

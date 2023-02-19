@@ -20,6 +20,8 @@ export interface BmbpMenuQueryFrom {
   parentMenuPath?: string;
   menuTitle?: string;
   menuRouteType?: string;
+  pageNo?: number;
+  pageSize?: number;
 }
 
 @Injectable()

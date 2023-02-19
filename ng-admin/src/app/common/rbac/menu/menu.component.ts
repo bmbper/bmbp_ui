@@ -53,6 +53,8 @@ export class MenuComponent implements CrudService {
     data: {
       menuTitle: '',
       parentMenuPath: '',
+      pageNo: 1,
+      pageSize: 10,
     },
     fieldLayout: FormLayout.Horizontal,
   };
@@ -140,11 +142,13 @@ export class MenuComponent implements CrudService {
   }
 
   onMenuGridPageNoChange(pageNo: number) {
-    alert(pageNo);
+    this.menuGridQueryForm.data.pageNo = pageNo;
+    this.findMenuGridData();
   }
 
   onMenuGridPageSizeChange(pageSize: number) {
-    alert(pageSize);
+    this.menuGridQueryForm.data.pageSize = pageSize;
+    this.findMenuGridData();
   }
 
   onQueryFormDataClear() {
