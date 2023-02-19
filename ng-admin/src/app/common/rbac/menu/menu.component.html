@@ -1,5 +1,16 @@
 <div class="bmbp-page bmbp-page-tg">
     <div class="bmbp-page-tg-tl">
+        <div class="bmbp-page-tl-tree-title">
+            <span>菜单管理</span>
+            <div class="opera">
+                <span>
+                    <d-icon dTooltip [content]="'刷新'"
+                            [icon]="'icon-refresh'"
+                            [operable]="true"
+                            (click)="findMenuTreeData()"></d-icon>
+                </span>
+            </div>
+        </div>
         <d-tree #menuTree (nodeSelected)="onMenuItemClick($event)"
                 [treeNodeChildrenKey]="menuTreeConfig.nodeChildren"
                 [treeNodeIdKey]="menuTreeConfig.nodeKey"
