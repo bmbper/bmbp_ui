@@ -8,16 +8,32 @@ import { DictItem } from '@app/dict';
 export class BmbpService {
   constructor(private toastService: ToastService) {}
 
-  warn(title: string, msg: string) {
-    this.toast('warn', title, msg);
-  }
-
-  info(title: string, msg: string) {
+  info(msg: string, title?: string) {
+    if (title == null) {
+      title = '信息';
+    }
     this.toast('info', title, msg);
   }
 
-  error(title: string, msg: string) {
+  warn(msg: string, title?: string) {
+    if (title == null) {
+      title = '警告';
+    }
+    this.toast('warn', title, msg);
+  }
+
+  error(msg: string, title?: string) {
+    if (title == null) {
+      title = '错误';
+    }
     this.toast('error', title, msg);
+  }
+
+  success(msg: string, title?: string) {
+    if (title == null) {
+      title = '信息';
+    }
+    this.toast('success', title, msg);
   }
 
   toast(toastType: string, title: string, msg: string) {

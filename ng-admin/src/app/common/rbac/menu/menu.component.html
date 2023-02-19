@@ -36,7 +36,7 @@
                     <d-col [dSpan]="7">
                         <d-form-item>
                             <d-form-label>
-                                资源类型:
+                                访问类型:
                             </d-form-label>
                             <d-form-control>
                                 <d-select
@@ -71,19 +71,20 @@
                         [width]="'150px'">
                     <d-cell *ngIf="colOption.field =='menuType'">
                         <ng-template let-cellItem="cellItem">
-                            {{util.dictLabel(cellItem, selectOptions.menuType)}}
+                            {{bmbp.dictLabel(cellItem, selectOptions.menuType)}}
                         </ng-template>
                     </d-cell>
                     <d-cell *ngIf="colOption.field =='menuRouteType'">
                         <ng-template let-cellItem="cellItem">
-                            {{util.dictLabel(cellItem, selectOptions.menuRouteType)}}
+                            {{bmbp.dictLabel(cellItem, selectOptions.menuRouteType)}}
                         </ng-template>
                     </d-cell>
                 </d-column>
                 <d-column [width]="'120px'" header="操作" field="$index">
                     <d-cell>
                         <ng-template let-rowItem="rowItem" let-rowIndex="rowIndex">
-                            <d-icon dTooltip [content]="'新增下级'" [icon]="'icon-add-sub-node'"
+                            <d-icon *ngIf="rowItem.menuType!='FUNC'" dTooltip [content]="'新增下级'"
+                                    [icon]="'icon-add-sub-node'"
                                     [operable]="true" [color]="'#5E7CE0'"
                                     (click)="onAddSubMenu($event,rowItem)"></d-icon>
                             <d-icon dTooltip [content]="'调整父级'" [icon]="'icon-go-tree'" [operable]="true"
@@ -95,7 +96,6 @@
                             <d-icon dTooltip [content]="'查看明细'" [icon]="'icon-preview'"
                                     [operable]="true"
                                     (click)="onViewMenu($event,rowItem)"></d-icon>
-
                             <d-icon dTooltip [content]="'删除'" [icon]="'icon-delete'" [operable]="true"
                                     [color]="'#F66F6A'"
                                     (click)="onDeleteMenu($event,rowItem)"></d-icon>

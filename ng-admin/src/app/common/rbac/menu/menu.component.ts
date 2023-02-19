@@ -97,11 +97,10 @@ export class MenuComponent implements CrudService {
 
   constructor(
     private service: MenuService,
-    private toast: ToastService,
-    public util: BmbpService,
+    public bmbp: BmbpService,
     private dialog: DialogService
   ) {
-    this.loadMenuTreeData();
+    this.findMenuTreeData();
   }
 
   ngOnInit(): void {}
@@ -112,23 +111,31 @@ export class MenuComponent implements CrudService {
     this.menuGridQueryForm.data.parentMenuId = event.data.originItem.menuId;
     this.menuGridQueryForm.data.parentMenuPath = event.data.originItem.menuPath;
     this.selectMenuTreeNode = event.data.originItem;
-    this.loadMenuGridData();
+    this.findMenuGridData();
   }
 
   onAddMenu() {
-    this.openMenuForm(this.selectMenuTreeNode);
+    this.openMenuForm({});
   }
 
-  loadMenuTreeData() {
+  findMenuTreeData() {
     this.service.findMenuTree().subscribe((vo) => {
-      this.menuTreeData = vo.data;
+      if (vo.code == 0) {
+        this.menuTreeData = vo.data;
+      } else {
+        this.bmbp.error(vo.msg);
+      }
     });
   }
 
-  loadMenuGridData() {
+  findMenuGridData() {
     let params = this.menuGridQueryForm.data;
     this.service.findMenuGrid(params).subscribe((vo) => {
-      this.menuGrid.data = vo.data;
+      if (vo.code == 0) {
+        this.menuGrid.data = vo.data;
+      } else {
+        this.bmbp.error(vo.msg);
+      }
     });
   }
 
@@ -146,7 +153,7 @@ export class MenuComponent implements CrudService {
   }
 
   onQueryMenuGrid() {
-    this.loadMenuGridData();
+    this.findMenuGridData();
   }
 
   onAddSubMenu($event: MouseEvent, rowItem: BmbpMenuVo): void {
@@ -167,19 +174,19 @@ export class MenuComponent implements CrudService {
   }
 
   onChangeParent($event: MouseEvent, rowItem: any): void {
-    this.util.info('提醒', '功能开发中');
+    this.bmbp.info('提醒', '功能开发中');
   }
 
   onEditMenu($event: MouseEvent, rowItem: any): void {
-    this.util.info('提醒', '功能开发中');
+    this.bmbp.info('提醒', '功能开发中');
   }
 
   onViewMenu($event: MouseEvent, rowItem: any): void {
-    this.util.info('提醒', '功能开发中');
+    this.bmbp.info('提醒', '功能开发中');
   }
 
   onDeleteMenu($event: MouseEvent, rowItem: any): void {
-    this.util.info('提醒', '功能开发中');
+    this.bmbp.info('提醒', '功能开发中');
   }
 
   afterMenuTreeInit($event: Dictionary<TreeNode>) {
@@ -197,7 +204,7 @@ export class MenuComponent implements CrudService {
 
   afterMenuFormSave(reload: boolean): void {
     if (reload) {
-      this.loadMenuTreeData();
+      this.findMenuTreeData();
     }
   }
 }

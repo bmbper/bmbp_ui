@@ -10,20 +10,28 @@ import {
 } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 import { SERVER_API } from '../environments/environment';
+import { BmbpService } from '@app/bmbp.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HttpService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, public bmbp: BmbpService) {}
 
   get<T>(url: string, params: any): Observable<T> {
-    return this.http.get<T>(url, {
-      params: params,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    return this.http
+      .get<T>(url, {
+        params: params,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
+          this.bmbp.error('请求错误', err.error);
+          return throwError(() => new Error(err.message));
+        })
+      );
   }
 
   post<T>(url: string, params?: any): Observable<T> {
@@ -34,12 +42,12 @@ export class HttpService {
           'Content-Type': 'application/json',
         },
       })
-      .pipe(catchError(this.handleError));
-  }
-
-  handleError(err: HttpErrorResponse) {
-    console.log(err);
-    return throwError(() => new Error(err.message));
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
+          this.bmbp.error('请求错误', err.error);
+          return throwError(() => new Error(err.message));
+        })
+      );
   }
 }
 
@@ -49,7 +57,6 @@ export class HttpServiceInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    console.log('拦截一下');
     let authToken = window.localStorage.getItem('bmbp_token');
     let headers = {
       'Content-Type': 'application/json',
@@ -66,7 +73,6 @@ export class HttpServiceInterceptor implements HttpInterceptor {
       url: newUrl,
       headers: Object.assign(req.headers, headers),
     });
-
     return next.handle(newReq);
   }
 }
