@@ -57,7 +57,7 @@ export class OrganComponent implements OnInit {
   organGridQueryForm: BmbpGridQueryFrom<BmbpMenuQueryFrom> = {
     data: {
       menuTitle: '',
-      parentMenuPath: '',
+      menuPath: '/',
     },
     fieldLayout: FormLayout.Horizontal,
   };
@@ -113,9 +113,7 @@ export class OrganComponent implements OnInit {
   ngAfterViewInit() {}
 
   onOrganItemClick(event: TreeNode) {
-    this.organGridQueryForm.data.parentMenuId = event.data.originItem.menuId;
-    this.organGridQueryForm.data.parentMenuPath =
-      event.data.originItem.menuPath;
+    this.organGridQueryForm.data.menuPath = event.data.originItem.menuPath;
     this.selectOrganTreeNode = event.data.originItem;
     this.loadGridData();
   }

@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 export interface BmbpMenuVo extends BaseVo {
   menuId?: string;
   parentMenuId?: string;
+  parentMenuPath?: string;
   menuTitle?: string;
   menuType?: string;
   menuPath?: string;
@@ -17,7 +18,8 @@ export interface BmbpMenuVo extends BaseVo {
 
 export interface BmbpMenuQueryFrom {
   parentMenuId?: string;
-  parentMenuPath?: string;
+  menuPath?: string;
+
   menuTitle?: string;
   menuRouteType?: string;
   pageNo?: number;
@@ -30,6 +32,7 @@ export class MenuService implements OnInit {
     menuTree: 'rbac/v1/menu/tree',
     menuPage: 'rbac/v1/menu/page',
     saveMenu: 'rbac/v1/menu/save',
+    findOne: 'rbac/v1/menu/info/id/',
   };
 
   ngOnInit(): void {}
@@ -49,5 +52,9 @@ export class MenuService implements OnInit {
 
   save(menuData: BmbpMenuVo): Observable<RespVo<BmbpMenuVo>> {
     return this.http.post<RespVo<BmbpMenuVo>>(this.VoURL.saveMenu, menuData);
+  }
+
+  findMenuInfo(rId: string): Observable<RespVo<BmbpMenuVo>> {
+    return this.http.get<RespVo<BmbpMenuVo>>(this.VoURL.findOne + rId);
   }
 }

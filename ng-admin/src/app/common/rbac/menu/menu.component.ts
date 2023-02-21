@@ -51,8 +51,8 @@ export class MenuComponent implements CrudService {
   };
   menuGridQueryForm: BmbpGridQueryFrom<BmbpMenuQueryFrom> = {
     data: {
-      menuTitle: '',
-      parentMenuPath: '',
+      menuPath: '',
+      parentMenuId: '',
       pageNo: 1,
       pageSize: 10,
     },
@@ -110,8 +110,7 @@ export class MenuComponent implements CrudService {
   ngAfterViewInit() {}
 
   onMenuItemClick(event: TreeNode) {
-    this.menuGridQueryForm.data.parentMenuId = event.data.originItem.menuId;
-    this.menuGridQueryForm.data.parentMenuPath = event.data.originItem.menuPath;
+    this.menuGridQueryForm.data.menuPath = event.data.originItem.menuPath;
     this.selectMenuTreeNode = event.data.originItem;
     this.findMenuGridData();
   }
@@ -128,6 +127,8 @@ export class MenuComponent implements CrudService {
         this.bmbp.error(vo.msg);
       }
     });
+    this.menuGridQueryForm.data.menuPath = '/';
+    this.findMenuGridData();
   }
 
   findMenuGridData() {
@@ -161,16 +162,20 @@ export class MenuComponent implements CrudService {
   }
 
   onAddSubMenu($event: MouseEvent, rowItem: BmbpMenuVo): void {
-    this.openMenuForm(rowItem);
+    let rowItemData = {
+      parentMenuId: rowItem.menuId,
+      parentMenuPath: rowItem.menuPath,
+    };
+    this.openMenuForm(rowItemData);
   }
 
-  openMenuForm(rowItem: BmbpMenuVo): void {
+  openMenuForm(rowItem: BmbpMenuVo, title?: string): void {
     this.menuFormDialogData = rowItem;
     this.dialog.open({
       id: 'common-menu-add-form',
       width: '700px',
       maxHeight: '700px',
-      title: '新增',
+      title: title || '新增菜单',
       contentTemplate: this.menuFormDialog,
       backdropCloseable: true,
       buttons: [],
@@ -182,7 +187,10 @@ export class MenuComponent implements CrudService {
   }
 
   onEditMenu($event: MouseEvent, rowItem: any): void {
-    this.bmbp.info('提醒', '功能开发中');
+    let rowItemData = {
+      rId: rowItem.rId,
+    };
+    this.openMenuForm(rowItemData, '编辑菜单');
   }
 
   onViewMenu($event: MouseEvent, rowItem: any): void {

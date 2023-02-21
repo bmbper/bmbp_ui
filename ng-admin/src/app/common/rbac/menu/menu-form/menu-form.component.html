@@ -2,13 +2,24 @@
     <form dForm [layout]="layoutDirection" ngForm [labelSize]="'sm'" [labelAlign]="'end'" (dSubmit)="saveMenu($event)">
         <d-row [dGutter]="24">
             <d-col [dSpan]="24">
-                <d-form-item>
+                <d-form-item *ngIf="!menuData.rId">
                     <d-form-label>
-                        上级菜单ID:
+                        上级菜单:
                     </d-form-label>
                     <d-form-control>
-                        <input disabled [(ngModel)]="menuData.parentMenuId" autocomplete="off" dTextInput
-                               name="parentMenuId"/>
+                        <input disabled [(ngModel)]="menuData.parentMenuPath" autocomplete="off" dTextInput
+                               name="parentMenuPath"/>
+                    </d-form-control>
+                </d-form-item>
+            </d-col>
+            <d-col [dSpan]="24">
+                <d-form-item *ngIf="menuData.rId">
+                    <d-form-label>
+                        资源路径:
+                    </d-form-label>
+                    <d-form-control>
+                        <input disabled [(ngModel)]="menuData.menuPath" autocomplete="off" dTextInput
+                               name="menuPath"/>
                     </d-form-control>
                 </d-form-item>
             </d-col>

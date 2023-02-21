@@ -18,10 +18,10 @@ import { BmbpService } from '@app/bmbp.service';
 export class HttpService {
   constructor(private http: HttpClient, public bmbp: BmbpService) {}
 
-  get<T>(url: string, params: any): Observable<T> {
+  get<T>(url: string, params?: any): Observable<T> {
     return this.http
       .get<T>(url, {
-        params: params,
+        params: params || {},
         headers: {
           'Content-Type': 'application/json',
         },

@@ -30,7 +30,19 @@ export class MenuFormComponent implements OnInit {
   constructor(private bmbp: BmbpService, private menuService: MenuService) {}
 
   ngOnInit(): void {
-    this.menuData.parentMenuId = this.data?.menuId;
+    let rId = this.data?.rId;
+    if (rId != null) {
+      this.menuService.findMenuInfo(rId).subscribe((vo) => {
+        if (vo.code == 0) {
+          this.menuData = vo.data;
+        } else {
+          this.bmbp.error('错误', vo.msg);
+        }
+      });
+    } else {
+      this.menuData.parentMenuId = this.data?.parentMenuId;
+      this.menuData.parentMenuPath = this.data?.parentMenuPath;
+    }
   }
 
   saveMenu($event: { valid: boolean; directive: any; data: any; errors: any }) {
